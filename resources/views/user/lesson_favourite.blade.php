@@ -1,0 +1,88 @@
+@extends('layout.index')
+
+@section('content')
+    <div id="main-content-wp" class="">
+        <div class="wrap clearfix">
+            <div class="col-md-3">
+                <div class="section" id="title-page">
+                    <div class="clearfix">
+                        <h3 id="index" class="text-uppercase">Danh mục</h3>
+                    </div>
+                </div>
+                @include('layout.sidebar_user')
+            </div>
+            <div class="col-md-9">
+                <div id="content">
+                    <div class="section" id="title-page">
+                        <div class="clearfix">
+                            <h3 id="index" class="text-center text-uppercase">Các bài học đã thích</h3>
+                        </div>
+                    </div>
+                    <div class="section" id="detail-page">
+                        @if(session('err'))
+                            <div class="alert alert-danger">
+                                {{session('err')}}
+                            </div>
+                        @endif
+
+                        @if(session('msg'))
+                            <div class="alert alert-success">
+                                {{session('msg')}}
+                            </div>
+                        @endif
+                        <div class="section-detail">
+                            <div class="filter-wp clearfix">
+                                <form method="GET" action="admin/lesson/list" class="form-s fl-left">
+                                    <input type="submit" name="sm_s" value="Tìm kiếm">
+                                    <input type="text" name="search" id="search">
+                                </form>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table list-table-wp">
+                                    <thead>
+                                    <tr>
+                                        <td><span class="thead-text">STT</span></td>
+                                        <td><span class="thead-text">Tên bài học</span></td>
+                                        <td><span class="thead-text">Thời gian</span></td>
+                                        <td><span class="thead-text">Bỏ yêu thích</span></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        @if(!empty($favourites))
+                                            <?php $num_order = 0; ?>
+                                            @foreach($favourites as $item)
+                                                <?php $num_order += 1; ?>
+                                                <td><span class="tbody-text">{!! $num_order !!}</span></td>
+                                                <td><span class="tbody-text">
+                                                <a href="lesson/{!! $item->lesson_id!!}.html">
+                                                    <?php $lesson = DB::table('lesson')->where('id', $item->lesson_id)->first();?>
+                                                    @if(!empty($lesson))
+                                                        {!! $lesson->lesson_name !!}
+                                                    @endif
+                                                </a>
+                                                </span>
+                                                </td>
+                                                <td><span class="tbody-text">{!! $item -> created_at !!}</span></td>
+                                                <td><span class="tbody-text "></span>
+                                                    <a href="user/lesson_favourite_delete/{!! $item->id !!}"
+                                                       title="Bỏ thích"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                            @endforeach
+                                        @else
+                                            <td colspan="4"><p>Chưa yêu thích bài học nào</p></td>
+                                        @endif
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@endsection

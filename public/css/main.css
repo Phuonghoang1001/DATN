@@ -1,0 +1,561 @@
+body {
+    background-image: url(../images/elight_background.png) !important;
+    font-size: 14px !important;
+    font-family: Montserrat !important;
+    background-color: #eef2f8 !important;
+}
+/*header*/
+.header {
+    background-color: #07adc6;
+    box-shadow: 2px 2px 2px #999;
+}
+.navbar {
+    margin: 10px 0px !important;
+}
+.navbar-brand {
+    display: block;
+    padding: 10px 0px !important;
+}
+.main-menu > ul > li a {
+    color: #fff;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.main-menu > ul > li:hover a, .main-menu > ul > li:active a {
+    background: #fff;
+    color: #000;
+}
+/*Home*/
+.course-header__title {
+    color: #000;
+    font-family: Montserrat !important;
+    font-size: 25px;
+}
+
+.lesson-list__line,
+.header__line {
+    width: 100px;
+    border: 1px solid #ffb940;
+    margin-bottom: 20px;
+}
+
+.course-item {
+    background-color: #f6f6f6;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.35);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.course-item__link {
+    display: block;
+    width: 45%;
+    float:left;
+    overflow: hidden;
+}
+.course-info {
+    width: 55%;
+    min-height: 260px;
+    float: left;
+    padding: 20px;
+    position: relative;
+}
+.course-item__title a{
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #00447e;
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid;
+}
+.course-item:hover .course-item__link img {
+    transform: scale(1.02);
+}
+
+.course-item__btn {
+    color: #fff;
+    background-color: #ffb940;
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 20px;
+    width: 80%;
+}
+.course-item__btn:hover {
+    text-decoration: none;
+    opacity: 0.7;
+    color: #fff;
+    transition: 0.5s;
+}
+
+.copy-right {
+    border-top: 1px solid #bbb;
+    padding: 20px 0px 10px;
+    font-size: 15px;
+    color: #999;
+    text-align: center;
+}
+
+/*---------------------------detail-lesson-----------------*/
+
+.main-wrapper {
+    margin-top:30px;
+    margin-bottom: 30px;
+}
+.lesson-wrapper{
+    background: #00457e;
+}
+.side-bar{
+    padding-left:20px;
+}
+.side-bar .side-bar-title {
+    padding: 10px 0px;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #fff;
+    font-weight: bold;
+    display: inline-block;
+}
+.side-bar-item {
+    padding: 10px 0px;
+    border-bottom: 1px dashed #ffb940;
+    margin: 5px;
+}
+.side-bar-item a{
+    color: #fff;
+    display: block;
+    -webkit-transition: 0.8s time;
+    -moz-transition: 0.8s time;
+    -ms-transition: 0.8s time;
+    -o-transition: 0.8s time;
+    transition: 0.8s time;
+}
+.side-bar-item a:hover{
+    color: #fecb00;
+    padding-left: 10px;
+}
+.lesson-single{
+    background-color: #fff;
+    padding: 15px 30px;
+}
+.lesson-detail-title {
+    text-transform: capitalize;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.lesson-detail-form {
+    font-style: italic;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+tr, td {
+    border: 1px solid #e5e5e5 !important;
+    margin: -1px !important;
+}
+td {
+    padding: 5px 10px !important;
+}
+.lesson-detail-content {
+    padding: 20px 30px;
+}
+.lesson-title,
+.user-question-title {
+    text-transform: uppercase;
+    margin-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.user-question {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px 30px;
+}
+.send-question {
+    width: 50%;
+    margin-bottom: 30px;
+}
+.send-question input[type=text] {
+    width: 100%;
+    padding: 10px 15px;
+}
+.send-question span {
+    background-color: #000;
+}
+.send-question button {
+    padding: 0px 10px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 20px;
+    border: 0px;
+}
+.item-question {
+    margin-bottom: 15px;
+}
+.create-at {
+    color: #999999;
+    margin-left: 5px;
+    font-size: 12px;
+}
+.content-question {
+    margin-left: 15px;
+
+}
+/*-------------------------------------------------Tab panel*/
+div.tab {
+    overflow: hidden;
+}
+/* Style the buttons inside the tab */
+div.tab button {
+    border: 2px solid transparent;
+    outline: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: none;
+}
+
+div.tab button::after {
+    content: '\f105 ';
+    font-family: Fontawesome;
+    color: #ffb940;
+    margin-left: 15px;
+    font-size: 15px;
+}
+
+div.tab button:last-child::after {
+    content: '';
+}
+div.tab button:hover, div.tab button.active {
+    border-bottom: 2px solid #ffb940;
+    color: #ffb940;
+}
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    border-top: none;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+@-webkit-keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/*---------------------------------------------button user action*/
+.user-actions button, .user-actions a {
+    width: 50px;
+    font-size: 30px;
+    display: inline-block;
+    height: 50px;
+    border: 0px;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 10px;
+}
+.user-actions .user-pin {
+    background: #01845a;
+    color: #fecb00;
+}
+.user-actions .user-favourite {
+    background: #fbeed5;
+    color: #e32124;
+}
+.user-actions .user-test {
+    background: #ffeb3b;
+    color: #2ab7ca;
+}
+.user-practice {
+    background: #ec492d;
+}
+.tooltip {
+    width: 150px;
+}
+
+/*----------------------------------------------Page test*/
+.test-wrapper{
+    background: #00457e;
+    box-shadow: 1px 0px 7px rgba(0,0,0,0.45);
+}
+.test-single{
+    background: #fff;
+    min-height: 500px;
+
+}
+.test-header{
+    background: #f4f4f4;
+    margin: 0px 15px;
+}
+.form-level {
+    color: #000;
+    padding: 25px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.form-level button, .btn-refresh {
+    margin-left: 30px;
+    display: inline-block;
+    background: #fecb00;
+    border: 0px;
+    line-height: 35px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    color: #fff;
+    transition: 0.3s;
+}
+.form-level button:hover, .btn-refresh:hover {
+    background: darkgoldenrod;
+}
+input[type=radio] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin: 0px 10px 0px 0px !important;
+    background: none;
+    border: 1px solid #dedede;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+}
+input[type=radio]:checked {
+    color: #fecb00;
+    width: 16px;
+    height: 16px;
+}
+input[type=radio]:checked:after {
+    content: '\2714';
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    display: block;
+    outline: none;
+    outline: 1px solid #fff;
+}
+label {
+    font-weight: normal !important;
+    margin-right: 20px !important;
+    margin-bottom: 0px !important;
+}
+#list-question{
+    padding:10px 30px;
+}
+#form-answer{
+    line-height: 30px;
+}
+.btn-answer{
+    background: #e32123;
+    color: #fff;
+    border: 0px;
+    margin-top: 20px;
+    padding: 6px 15px;
+    font-size: 16px;
+}
+/*--------------------------------Login------------------------------*/
+.main-wrapper {
+    min-height: 450px;
+}
+
+#login-wp {
+    width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.35);
+}
+
+.register-wp {
+    width: 600px !important;
+}
+
+.page-title {
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 30px;
+}
+
+#login-wp .form-control {
+    height: 45px;
+}
+
+#login-wp input[type=submit] {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 0px;
+    color: #fff;
+    background: #ffb940;
+    margin-right: 5px;
+}
+
+#login-wp a {
+    display: inline-block;
+    padding: 0px 10px;
+    border-right: 1px solid;
+}
+
+#login-wp a:last-child {
+    border-right: 0px;
+}
+
+#main-content-wp {
+    background: #fff;
+    border-radius: 5px;
+
+}
+
+.form-info input[type=text],
+.form-info input[type=email],
+.form-info input[type=password],
+.form-info input[type=date] {
+    padding: 0px 15px;
+    display: block;
+    height: 40px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+#main-content-wp label {
+    margin: 10px 0px;
+    display: block;
+}
+
+#main-content-wp button {
+    margin: 10px 0px;
+    padding: 10px 15px;
+    border: 0px;
+    background: #ffb940;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.form-info {
+    width: 70%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.35);
+}
+
+#sidebar {
+    width: 100%;
+    padding: 20px 0px;
+}
+
+#content {
+    border-left: 1px solid #ddd;
+    padding: 20px 0px;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.user-comment__title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.form-comment {
+    width: 70%;
+}
+
+.form-comment #comment {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #2ab7ca;
+}
+
+.btn-comment {
+    height: 45px;
+    border: 1px solid #2ab7ca !important;
+    color: #2ab7ca;
+    margin-left: -1px;
+    background: none;
+}
+
+.item-comment {
+    margin-bottom: 10px;
+}
+
+.user-img {
+    width: 10%;
+}
+
+img {
+    max-width: 100%;
+}
+
+.user-info {
+    padding: 0px 10px;
+}
+
+.user-info p {
+    margin: 0px;
+}
+
+.user-name {
+    color: #07adc6;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 20px;
+    line-height: 24px;
+}
+
+.published {
+    color: #999;
+    font-size: 13px
+}
+
+.comment-content {
+    line-height: 24px;
+    font-size: 16px;
+}
+
+/*------------------------------List page ----------------------------*/
+#detail-page {
+    margin: 20px;
+}
+
+.section-detail .form-s {
+    margin-bottom: 30px;
+}
+
+.section-detail .form-s input {
+    height: 40px;
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+.form-s input[type=submit] {
+    background: #fecb00;
+    color: #fff;
+    border: 1px solid #fecb00;
+}
+
+.form-s input[type=text] {
+    border: 1px solid #ddd;
+    width: 250px;
+}

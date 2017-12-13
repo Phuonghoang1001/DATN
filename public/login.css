@@ -1,0 +1,33 @@
+/*LOGIN*/
+.login-page{
+    text-align: center;
+    margin: 100px 0px;
+}
+#login-wp{
+    display: inline-block;
+    width: 350px;
+    background: #4FA327;
+    padding: 50px 20px;
+    border-radius: 3px;
+}
+#login-wp .page-title{
+    font-family: 'Roboto Bold';
+    font-weight: normal;
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+#login-wp input[type="text"], #login-wp input[type="password"]{ width: 100%; display: block; padding: 10px 15px; border-radius: 3px; border: none; outline: none; margin-bottom: 15px;}
+.remember-box{ text-align: left; color: #fff; font-size: 13px; color: #fff; margin-bottom: 15px;}
+.remember-box label{ margin-left: 10px;}
+#login-wp input[type="submit"]{
+    display: inline-block;
+    padding: 10px 25px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-family: 'Roboto Medium';
+}
+#login-wp input[type="submit"]:hover{ background: #ddd;}
