@@ -50,7 +50,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     @if(!empty($listComment))
                                         <?php $num_order = 0; ?>
                                         @foreach($listComment as $item)
@@ -58,21 +57,21 @@
                                             <tr>
                                                 <td><span class="tbody-text">{!! $num_order !!}</span></td>
                                                 <td><span class="tbody-text">
-                                                <a href="lesson/{!! $item->lesson_name !!}.html">
-                                                    <?php $lesson = DB::table('lesson')->where('id', $item->lesson_id)->first();?>
+                                                <a href="lesson/{!! $item['lesson_id'] !!}.html">
+                                                    <?php $lesson = DB::table('lesson')->where('id', $item['lesson_id'])->first();?>
                                                     @if(!empty($lesson))
                                                         {!! $lesson->lesson_name !!}
                                                     @endif
                                                 </a>
                                                 </span>
                                                 </td>
-                                                <td><span class="tbody-text">{!! $item -> content !!}</span></td>
-                                                <td><span class="tbody-text">{!! $item -> status !!}</span></td>
+                                                <td><span class="tbody-text">@if($item['level']!=0){!! '<i style="color:red; margin-right: 5px">Rep : </i>' !!}@endif{!!$item['content'] !!}</span></td>
+                                                <td><span class="tbody-text">{!! $item ['status'] !!}</span></td>
                                                 <td><span class="tbody-text "></span>
-                                                    <a href="user/myComment_delete/{!! $item->id !!}"
+                                                    <a href="user/myComment_delete/{!! $item['id'] !!}"
                                                        title="Xóa câu hỏi của bạn"><i
                                                                 class="fa fa-trash" aria-hidden="true"></i></a>
-                                                    <a href="user/myComment_edit/{!! $item->id !!}"
+                                                    <a href="user/myComment_edit/{!! $item['id']  !!}"
                                                        title="Sửa câu hỏi của bạn"><i
                                                                 class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                 </td>

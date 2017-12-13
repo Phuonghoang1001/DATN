@@ -60,14 +60,14 @@
                                                 <td><span class="tbody-text">
                                                     <?php $test = DB::table('user_test')->where('id', $item->user_test_id)->first();?>
                                                         @if(!empty($test))
-                                                            {!! 'Bài test số ' + $test->id !!}
+                                                            {!!   $test->id !!}
                                                         @endif
                                                 </span>
                                                 </td>
                                                 <td><span class="tbody-text">
                                                          <?php $question = DB::table('question_test')->where('id', $item->test_id)->first();?>
                                                         @if(!empty($question))
-                                                            {!! $question -> content !!}
+                                                            {!! $question -> test_content !!}
                                                         @endif
                                                     </span></td>
                                                 <td><span class="tbody-text">{!! $item -> my_answer !!}</span></td>

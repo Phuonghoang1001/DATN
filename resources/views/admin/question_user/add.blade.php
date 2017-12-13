@@ -1,54 +1,51 @@
 @extends('admin.layout.index')
 
 @section('content')
-<div id="main-content-wp" class="add-cat-page">
-    <div class="section" id="title-page">
-        <div class="clearfix">
-            <a href="?page=add_product" title="" id="add-new" class="fl-left">Thêm mới</a>
-            <h3 id="index" class="fl-left">Thêm sản phẩm</h3>
+    <div id="main-content-wp" class="add-cat-page">
+        <div class="section" id="title-page">
+            <div class="clearfix">
+                <a href="admin/question_comment/add" title="" id="add-new" class="fl-left">Thêm mới</a>
+                <h3 id="index" class="fl-left">Giải đáp thắc mắc</h3>
+            </div>
         </div>
-    </div>
-    <div class="wrap clearfix">
-        @include('admin.layout.sidebar')
+        <div class="wrap clearfix">
+            @include('admin.layout.sidebar')
 
-        <div id="content" class="fl-right">
-            <div class="section" id="detail-page">
-                <div class="section-detail">
-                    <form method="POST">
-                        <label for="product-name">Tên sản phẩm</label>
-                        <input type="text" name="product_name" id="product-name">
-                        <label for="product-code">Mã sản phẩm</label>
-                        <input type="text" name="product_code" id="product-code">
-                        <label for="price">Giá sản phẩm</label>
-                        <input type="text" name="price" id="price">
-                        <label for="desc">Mô tả ngắn</label>
-                        <textarea name="desc" id="desc"></textarea>
-                        <label for="desc">Chi tiết</label>
-                        <textarea name="desc" id="desc"></textarea>
-                        <label>Hình ảnh</label>
-                        <div id="uploadFile">
-                            <input type="file" name="file" id="upload-thumb">
-                            <input type="submit" name="btn-upload-thumb" value="Upload" id="btn-upload-thumb">
-                            <img src="public/images/img-thumb.png">
-                        </div>
-                        <label>Danh mục sản phẩm</label>
-                        <select name="parent_id">
-                            <option value="">-- Chọn danh mục --</option>
-                            <option value="1">Thể thao</option>
-                            <option value="2">Xã hội</option>
-                            <option value="3">Tài chính</option>
-                        </select>
-                        <label>Trạng thái</label>
-                        <select name="status">
-                            <option value="0">-- Chọn danh mục --</option>
-                            <option value="1">Chờ duyệt</option>
-                            <option value="2">Đã đăng</option>
-                        </select>
-                        <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
-                    </form>
+            <div id="content" class="fl-right">
+                <div class="section" id="detail-page">
+                    <div class="section-detail">
+                        @if(count($errors) > 0)
+                            <div class='alert alert-danger'>
+                                @foreach($errors ->all() as $err)
+                                    {{$err}}<br>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        @if(session('msg'))
+                            <div class="alert alert-success">
+                                {{session('msg')}}
+                            </div>
+                        @endif
+                        <form method="POST" action="admin/question_comment/add" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <label for="detail_name">Tên bài học</label>
+                            <select name="parent_id" id="parent_id">
+                                <option value="0">------Chọn------</option>
+
+                                @if (!empty($list_multi))
+                                    @foreach ($list_multi as $item)
+                                        <option value="{!! $item->id !!}"><?php echo str_repeat('--', $item['level']) . $item['content']?></option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <label for="content">Nội dung</label>
+                            <input type="text" name="content_reply" id="content">
+                            <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

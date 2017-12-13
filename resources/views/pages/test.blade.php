@@ -21,18 +21,19 @@
                                                    value="medium">Trung bình
                                         </label>
                                         <label>
-                                        <input type="radio" name="level" id="hard"
-                                               value="hard">Khó
+                                            <input type="radio" name="level" id="hard"
+                                                   value="hard">Khó
                                         </label>
                                         <button type="submit" name="btn-practice">Làm bài test</button>
                                     </form>
                                 </div>
-                                <div class="col-md-5" id="count-down">
+                                <div class="col-md-5 test-header-right">
+                                    <div id="count-down">
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div id="list-question">
 
                         </div>

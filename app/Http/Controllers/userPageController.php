@@ -104,9 +104,14 @@ class userPageController extends Controller
     //get list my comment
     public function getMyComment()
     {
-        $listComment = QuestionComment::where('user_id', Auth::user()->id)->get();
-
-        return view('user.myComment', ['listComment' => $listComment]);
+        $user_commment = QuestionComment::where('user_id', Auth::user()->id)->get()->toArray();
+        foreach ($user_commment as $item){
+            $reply = QuestionComment::where('parent_id',$item['id'])->get()->toArray();
+        }
+        $list_comment = array_merge($user_commment, $reply);
+        var_dump($list_comment);
+        $multi_level = muti_level($list_comment);
+        return view('user.myComment', ['listComment' => $multi_level]);
 
     }
 

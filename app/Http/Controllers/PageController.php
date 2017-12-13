@@ -41,12 +41,13 @@ class PageController extends Controller
         $lesson_detail = LessonDetail::where('lesson_id', $id)->get();
         $question_test = QuestionTest::where('lesson_id', $id)->where('level', 'easy')->get();
         $question_comment = QuestionComment::where('lesson_id', $id)->get();
+        $multi_level = muti_level($question_comment);
         return view('pages.lesson',
             [
                 'lesson_item' => $lesson_item,
                 'lesson_detail' => $lesson_detail,
                 'question_test' => $question_test,
-                'question_comment' => $question_comment,
+                'question_comment' => $multi_level,
                 'favourite' => $favourite,
                 'followed' => $followed
             ]);
@@ -102,7 +103,7 @@ class PageController extends Controller
 
         //Tính điểm và lưu bài kiểm tra
         if (!empty($correct) && !empty($wrong)) {
-            $score = count($correct) / count($question_test);
+            $score = count($correct).'/'.count($question_test);
         } else {
             $score = 0;
         }
@@ -111,7 +112,8 @@ class PageController extends Controller
             [
                 'user_id' => Auth::user()->id,
                 'lesson_id' => $lesson_item->id,
-                'score' => $score
+                'score' => $score,
+                'created_at' => now()->toDateTimeString(),
             ]);
 
         //Lưu đáp án bài kiểm tra
@@ -155,7 +157,7 @@ class PageController extends Controller
 
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
                 //back page previous after login
-                 return redirect(session('link'));
+                return redirect(session('link'));
             } else {
                 $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
                 return redirect()->back()->withInput()->withErrors($errors);

@@ -357,11 +357,15 @@ label {
     margin-right: 20px !important;
     margin-bottom: 0px !important;
 }
-#list-question{
+#list-question, #form-result{
     padding:10px 30px;
 }
-#form-answer{
+#form-answer, #form-result{
     line-height: 30px;
+}
+.test-header-right{
+    padding: 33px 0px;
+    font-size: 16px;
 }
 .btn-answer{
     background: #e32123;

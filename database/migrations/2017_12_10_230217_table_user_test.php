@@ -19,7 +19,7 @@ class TableUserTest extends Migration
            $table->integer('user_id')->references('id')->on('users');
            $table->integer('lesson_id')->references('id')->on('lesson');
            $table->string('score');
-           $table->timestamps();
+           $table->timestamps()->notnull();
         });
     }
 

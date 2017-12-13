@@ -44,36 +44,49 @@
                                     <td><span class="thead-text">Bài học</span></td>
                                     <td><span class="thead-text">Người dùng</span></td>
                                     <td><span class="thead-text">Nội dung câu hỏi</span></td>
+                                    <td><span class="thead-text">Thao tác</span></td>
                                     <td><span class="thead-text">Trạng thái</span></td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(!empty($list_comment))
-                                @foreach($list_commment as $item)
-                                    <tr>
-                                        <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                        <td><span class="tbody-text"><h3>{{$item -> id}}</h3></span></td>
-                                        <td>
+                                @if(!empty($list_multi))
+                                    @foreach($list_multi as $item)
+                                        <tr>
+                                            <td><input type="checkbox" name="checkItem" class="checkItem"></td>
+                                            <td><span class="tbody-text"><h3>{{$item -> id}}</h3></span></td>
+                                            <td>
                                             <span class="tbody-text ">
                                                 <?php $lesson = DB::table('lesson')->where('id', $item->lesson_id)->first();?>
                                                 @if(!empty($lesson->lesson_name))
                                                     {{ $lesson->lesson_name }}
                                                 @endif
                                             </span>
-                                        </td>
-                                        <td class="clearfix"><span
-                                                    class="tbody-text ">
+                                            </td>
+                                            <td class="clearfix"><span
+                                                        class="tbody-text ">
                                                 <?php $user = DB::table('users')->where('id', $item->user_id)->first();?>
-                                                @if(!empty($user))
-                                                    {!! $user->name !!}
-                                                @endif
+                                                    @if(!empty($user))
+                                                        {!! $user->name !!}
+                                                    @endif
                                             </span>
-                                        </td>
-                                        <td><span class="tbody-text"><h3>{{$item -> content}}</h3></span></td>
-                                        <td><span class="tbody-text"><h3>{{$item -> status}}</h3></span></td>
-                                    </tr>
-                                @endforeach
-                                    @endif
+                                            </td>
+                                            <td><span class="tbody-text"><h3>{{$item -> content}}</h3></span></td>
+                                            <td>
+                                            <span class="tbody-text">
+                                                <ul class="list-operation">
+                                                <li><a href="admin/question_comment/edit/{{$item->id}}" title="Sửa"
+                                                       class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                </li>
+                                                <li><a href="admin/question_comment/delete/{{$item->id}}" title="Xóa"
+                                                       class="delete"><i class="fa fa-trash" aria-hidden="true" onclick="confirm_delete('Bạn có chắc chắn muốn xóa câu trả lời này?')"></i></a>
+                                                </li>
+                                            </ul>
+                                            </span>
+                                            </td>
+                                            <td><span class="tbody-text"><h3>{{$item -> status}}</h3></span></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

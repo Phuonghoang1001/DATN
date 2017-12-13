@@ -134,7 +134,7 @@
                                     <ul>
                                         @if(!empty($question_comment))
                                             @foreach($question_comment as $item)
-                                                <li class="item-comment clearfix">
+                                                <li class="item-comment clearfix" @if($item->level != 0) style="padding-left: 90px;" @endif>
                                                     <div class="user-img pull-left">
                                                         <img src="images/img_giaotiep.jpg">
                                                     </div>
