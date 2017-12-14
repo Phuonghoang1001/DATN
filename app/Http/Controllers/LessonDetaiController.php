@@ -16,10 +16,11 @@ class LessonDetaiController extends Controller
         $lesson = Lesson::all();
         $search_detail = $request->search_detail;
         if (empty($search_detail)) {
-            $list_detail = LessonDetail::all();
+            $list_detail = LessonDetail::paginate(10);
         } else {
-            $list_detail = LessonDetail::where('lesson_id', $search_detail)->get();
+            $list_detail = LessonDetail::where('lesson_id', $search_detail)->get()->paginate(10);
         }
+        $list_detail->withPath('admin/lesson_detail/list');
         return view('admin.lesson_detail.list', ['search_detail' => $search_detail , 'list_detail' => $list_detail, 'lesson' => $lesson]);
     }
 
@@ -96,5 +97,30 @@ class LessonDetaiController extends Controller
         $detail = LessonDetail::find($id);
         $detail->delete();
         return redirect('admin/lesson_detail/list')->with('msg', 'Xóa học phần thành công');
+    }
+
+    public function postImportData(Request $request)
+    {
+        if ($request->hasFile('import_file')) {
+            $path = $request->file('import_file')->getRealPath();
+            $data = Excel::load($path, function ($reader) {
+            })->get();
+
+            if (!empty($data) && $data->count()) {
+                foreach ($data->toArray() as $key => $v) {
+                    $insert[] = [
+                        'lesson_id' => $v['lesson_id'],
+                        'detail_name' => $v['detail_name'],
+                        'detail_form' => $v['detail_form'],
+                        'detail_content' => $v['detail_content'],
+                    ];
+                }
+            }
+            if (!empty($insert)) {
+                LessonDetail::insert($insert);
+                return back()->with('success', 'Thêm file thành công');
+            }
+        }
+        return back()->with('error', 'Vui lòng check lại ');
     }
 }

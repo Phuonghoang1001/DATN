@@ -36,7 +36,7 @@
                             {{--</form>--}}
                         </div>
                         <div class="table-responsive">
-                            <table class="table list-table-wp">
+                            <table class="table list-table-wp table-bordered">
                                 <thead>
                                 <tr>
                                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
@@ -62,7 +62,7 @@
                                                 @endif
                                             </span>
                                             </td>
-                                            <td class="clearfix"><span
+                                            <td ><span
                                                         class="tbody-text ">
                                                 <?php $user = DB::table('users')->where('id', $item->user_id)->first();?>
                                                     @if(!empty($user))
@@ -78,7 +78,7 @@
                                                        class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li><a href="admin/question_comment/delete/{{$item->id}}" title="Xóa"
-                                                       class="delete"><i class="fa fa-trash" aria-hidden="true" onclick="confirm_delete('Bạn có chắc chắn muốn xóa câu trả lời này?')"></i></a>
+                                                       data-confirm ="Bạn có chắc chắn muốn xóa ?"    class="delete"><i class="fa fa-trash" aria-hidden="true" ></i></a>
                                                 </li>
                                             </ul>
                                             </span>
@@ -90,7 +90,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
                 <div class="section" id="paging-wp">
@@ -98,20 +97,9 @@
                         <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
                         <ul id="list-paging" class="fl-right">
                             <li>
-                                <a href="" title=""><</a>
+                                {!! $list_comment ->links() !!}
                             </li>
-                            <li>
-                                <a href="" title="">1</a>
-                            </li>
-                            <li>
-                                <a href="" title="">2</a>
-                            </li>
-                            <li>
-                                <a href="" title="">3</a>
-                            </li>
-                            <li>
-                                <a href="" title="">></a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

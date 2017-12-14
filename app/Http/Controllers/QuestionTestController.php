@@ -18,6 +18,7 @@ class QuestionTestController extends Controller
         } else {
             $list_question_test = QuestionTest::where('lesson_id', $search_question)->get()->paginate(5);
         }
+        $list_question_test ->withPath('admin/question_test/list');
         return view('admin.question_test.list', ['search_question' => $search_question, 'list_question_test' => $list_question_test, 'lesson' => $lesson]);
     }
 
@@ -153,7 +154,7 @@ class QuestionTestController extends Controller
             $data = Excel::load($path, function ($reader) {
             })->get();
 
-            if (!empty($data) && count($data) > 0) {
+            if (!empty($data) && $data->count()) {
                 foreach ($data->toArray() as $key => $v) {
                     $insert[] = [
                         'lesson_id' => $v['lesson_id'],

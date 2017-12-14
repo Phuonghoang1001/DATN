@@ -17,7 +17,8 @@ class UserController extends Controller
     //
     public function getList(Request $request)
     {
-        $users = User::all();
+        $users = User::paginate(10);
+        $users->withPath('admin/user/list');
         return view('admin.user.list', ['users' => $users]);
     }
 

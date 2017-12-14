@@ -17,11 +17,14 @@ class LessonController extends Controller
     public function getList(Request $request)
     {
         $search = $request->search;
+
         if (empty($search)) {
-            $list_lesson = Lesson::all();
+            $list_lesson = Lesson::paginate(10);
+            $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson]);
         } else {
-            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->get();
+            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->get()->paginnate(10);
+            $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson, 'search' => $search]);
         }
     }
@@ -30,6 +33,7 @@ class LessonController extends Controller
     {
         return view('admin.lesson.add');
     }
+
     public function postAdd(Request $request)
     {
         $this->validate($request,
@@ -65,11 +69,13 @@ class LessonController extends Controller
         $lesson->save();
         return redirect('admin/lesson/add')->with('msg', 'Thêm bài học thành công');
     }
+
     public function getEdit($ID)
     {
         $lesson = Lesson::find($ID);
         return view('admin.lesson.edit', ['lesson' => $lesson]);
     }
+
     public function postEdit(Request $request, $ID)
     {
         $this->validate($request,
@@ -100,7 +106,7 @@ class LessonController extends Controller
                 unlink("upload/" . $lesson->lesson_image);
                 $file->move("upload", $img);
                 $lesson->lesson_image = $img;
-            }else{
+            } else {
                 $file->move("upload", $img);
                 $lesson->lesson_image = $img;
             }
@@ -108,6 +114,7 @@ class LessonController extends Controller
         $lesson->save();
         return redirect('admin/lesson/list')->with('msg', 'Sửa thành công');
     }
+
     public function getDelete($ID)
     {
         $lesson = Lesson::find($ID);

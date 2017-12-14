@@ -12,13 +12,17 @@ class QuestionCommentController extends Controller
     //
     public function __construct()
     {
-        $list_commment = QuestionComment::all();
-        $list_multi = muti_level($list_commment);
+        $list_comment = QuestionComment::paginate(10);
+        $list_comment->withPath('admin/question_comment/list');
+        view()->share('list_comment', $list_comment);
+        $list_multi = muti_level($list_comment);
         view()->share('list_multi', $list_multi);
+
     }
 
     public function getList()
     {
+
         return view('admin.question_user.list');
     }
 

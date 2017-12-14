@@ -34,9 +34,16 @@
                                 </select>
                                 <input type="submit" name="sm_s" value="Tìm kiếm">
                             </form>
+                            <form method="POST" action="{{url('/admin/lesson_detail/import_data')}}"
+                                  enctype="multipart/form-data" class="form-s fl-right">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <p style="color: red">{!! $errors->first('import_data') !!}</p>
+                                <input type="file" name="import_file"/>
+                                <button class="btn btn-primary">Import File</button>
+                            </form>
                         </div>
                         <div class="table-responsive">
-                            <table class="table list-table-wp">
+                            <table class="table list-table-wp table-bordered">
                                 <thead>
                                 <tr>
                                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
@@ -61,13 +68,13 @@
                                             </span>
                                             </td>
                                             <td><span class="tbody-text ">{{$item -> detail_name}}</span></td>
-                                            <td class="clearfix">
+                                            <td >
                                                 <ul class="list-operation">
                                                     <li><a href="admin/lesson_detail/edit/{{$item ->id}}" title="Sửa"
                                                            class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                     </li>
                                                     <li><a href="admin/lesson_detail/delete/{{$item ->id}}" title="Xóa"
-                                                           class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                           data-confirm ="Bạn có chắc chắn muốn xóa ?"    class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -84,20 +91,9 @@
                         <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
                         <ul id="list-paging" class="fl-right">
                             <li>
-                                <a href="" title=""><</a>
+                                {!! $list_detail ->links() !!}
                             </li>
-                            <li>
-                                <a href="" title="">1</a>
-                            </li>
-                            <li>
-                                <a href="" title="">2</a>
-                            </li>
-                            <li>
-                                <a href="" title="">3</a>
-                            </li>
-                            <li>
-                                <a href="" title="">></a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

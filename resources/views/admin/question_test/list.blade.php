@@ -49,6 +49,7 @@
                                     <td><span class="thead-text">STT</span></td>
                                     <td><span class="thead-text">Bài học</span></td>
                                     <td><span class="thead-text">Câu hỏi</span></td>
+                                    <td><span class="thead-text">Thao tác</span></td>
                                     <td><span class="thead-text">Đáp án đúng</span></td>
                                     <td><span class="thead-text">Loại câu hỏi</span></td>
                                     <td><span class="thead-text">Mức độ</span></td>
@@ -68,14 +69,15 @@
                                                 @endif
                                             </span>
                                         </td>
-                                        <td class="clearfix"><span
-                                                    class="tbody-text ">{{$item -> test_content}}</span>
+                                        <td><span
+                                                    class="tbody-text ">{{$item -> test_content}}</span></td>
+                                        <td>
                                             <ul class="list-operation fl-right">
                                                 <li><a href="admin/question_test/edit/{{$item ->id}}" title="Sửa"
                                                        class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li><a href="admin/question_test/delete/{{$item ->id}}" title="Xóa"
-                                                       class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                       data-confirm ="Bạn có chắc chắn muốn xóa ?"     class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </li>
                                             </ul>
                                         </td>
@@ -96,19 +98,7 @@
                         <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
                         <ul id="list-paging" class="fl-right">
                             <li>
-                                <a href="" title=""><</a>
-                            </li>
-                            <li>
-                                <a href="" title="">1</a>
-                            </li>
-                            <li>
-                                <a href="" title="">2</a>
-                            </li>
-                            <li>
-                                <a href="" title="">3</a>
-                            </li>
-                            <li>
-                                <a href="" title="">></a>
+                                {!! $list_question_test ->links() !!}
                             </li>
                         </ul>
                     </div>

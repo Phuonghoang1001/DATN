@@ -39,7 +39,7 @@
 
                             </div>
                             <div class="table-responsive">
-                                <table class="table list-table-wp">
+                                <table class="table list-table-wp table-bordered">
                                     <thead>
                                     <tr>
                                         <td><span class="thead-text">STT</span></td>

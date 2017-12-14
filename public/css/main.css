@@ -6,7 +6,7 @@ body {
 }
 /*header*/
 .header {
-    background-color: #07adc6;
+    background-color: #00457e;
     box-shadow: 2px 2px 2px #999;
 }
 .navbar {
@@ -40,7 +40,7 @@ body {
 }
 
 .course-item {
-    background-color: #f6f6f6;
+    background-color: #fff;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.35);
     margin-bottom: 30px;
     overflow: hidden;
@@ -154,13 +154,6 @@ body {
     font-size: 14px;
     display: flex;
     justify-content: center;
-}
-tr, td {
-    border: 1px solid #e5e5e5 !important;
-    margin: -1px !important;
-}
-td {
-    padding: 5px 10px !important;
 }
 .lesson-detail-content {
     padding: 20px 30px;

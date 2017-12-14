@@ -23,6 +23,10 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="text-center">
+                    {!! $lesson->links() !!}
+                </div>
+
             </div>
         </div>
 

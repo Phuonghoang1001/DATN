@@ -104,11 +104,13 @@
     font-style: italic;
 }
 #list-paging li{ float: left;}
-#list-paging li a{
+#list-paging li a{color: #555;}
+#list-paging li a,#list-paging li span{
     display: inline-block;
-    color: #555;
     font-size: 13px;
-    padding: 0px 5px;
+    width: 35px;
+    height: 35px;
+    margin-right: -1px;
 }
 #main-menu > li{ position: relative;}
 #main-menu .sub-menu{
@@ -168,3 +170,15 @@
 .form-s input[type="file"]{
     display:inline-block;
 }
+#dataConfirmModal{
+    width: 20%;
+    background: #fff;
+    margin: 180px auto;
+    height: 165px;
+    border-radius: 5px;
+}
+.tbody-thumb{
+    max-height: 35px;
+    overflow: hidden;
+}
+td{max-width: 500px;}

@@ -21,7 +21,8 @@ class PageController extends Controller
     //
     function __construct()
     {
-        $lesson = Lesson::all();
+        $lesson = Lesson::paginate(3);
+        $lesson->withPath('home');
         view()->share('lesson', $lesson);
 
         $lesson_detail = LessonDetail::all();
@@ -91,14 +92,17 @@ class PageController extends Controller
                     $wrong[$question->id] = $answer;
                 }
                 $answer_question[$question->id] = $answer;
-                $data[] = [
-                    'test_id' => $question->id,
-                    'my_answer' => $answer,
-                    'right_answer' => $right_answer
-                ];
+
             } else {
                 $answer_question[$question->id] = '';
+                $answer = '';
             }
+            $data[] = [
+                'test_id' => $question->id,
+                'my_answer' => $answer,
+                'right_answer' => $right_answer
+            ];
+
         }
 
         //Tính điểm và lưu bài kiểm tra
@@ -122,7 +126,7 @@ class PageController extends Controller
             $user_test_detail->user_test_id = $user_test_id;
             $user_test_detail->test_id = $item['test_id'];
             $user_test_detail->my_answer = $item['my_answer'];
-            $user_test_detail->right_answer = $item['my_answer'];
+            $user_test_detail->right_answer = $item['right_answer'];
             $user_test_detail->save();
         }
         return view('pages.result', ['correct' => $correct, 'wrong' => $wrong, 'question_test' => $question_test, 'lesson_item' => $lesson_item, 'level' => $level, 'answer' => $answer_question]);

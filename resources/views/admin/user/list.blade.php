@@ -32,12 +32,13 @@
 
                     </div>
                     <div class="table-responsive">
-                        <table class="table list-table-wp">
+                        <table class="table list-table-wp table-bordered">
                             <thead>
                             <tr>
                                 <td><input type="checkbox" name="checkAll" id="checkAll"></td>
                                 <td><span class="thead-text">STT</span></td>
                                 <td><span class="thead-text">Họ và tên</span></td>
+                                <td><span class="thead-text">Thao tác</span></td>
                                 <td><span class="thead-text">Email</span></td>
                                 <td><span class="thead-text">Quyền</span></td>
                                 <td><span class="thead-text">Giới Tính</span></td>
@@ -49,10 +50,11 @@
                             <tr>
                                 <td><input type="checkbox" name="checkItem" class="checkItem"></td>
                                 <td><span class="tbody-text"><h3>{{$user -> id}}</h3></span></td>
-                                <td class="clearfix"><span class="tbody-text ">{{$user -> name}}</span>
+                                <td ><span class="tbody-text ">{{$user -> name}}</span></td>
+                                <td>
                                     <ul class="list-operation fl-right">
                                         <li><a href="admin/user/edit/{{$user->id}}" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                        <li><a href="admin/user/delete/{{$user->id}}" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                        <li><a href="admin/user/delete/{{$user->id}}" data-confirm ="Bạn có chắc chắn muốn xóa ?" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </td>
                                 <td><span class="tbody-text"><h3>{{$user -> email}}</h3></span></td>
@@ -71,19 +73,7 @@
                     <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
                     <ul id="list-paging" class="fl-right">
                         <li>
-                            <a href="" title=""><</a>
-                        </li>
-                        <li>
-                            <a href="" title="">1</a>
-                        </li>
-                        <li>
-                            <a href="" title="">2</a>
-                        </li>
-                        <li>
-                            <a href="" title="">3</a>
-                        </li>
-                        <li>
-                            <a href="" title="">></a>
+                           {!! $users->link() !!}
                         </li>
                     </ul>
                 </div>
