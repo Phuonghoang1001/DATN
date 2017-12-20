@@ -58,10 +58,10 @@ class LessonController extends Controller
             }
             $name = $file->getClientOriginalName();
             $img = str_random(4) . "_" . $name;
-            while (file_exists("upload" . $img)) {
+            while (file_exists("upload/image" . $img)) {
                 $img = str_random(4) . "_" . $name;
             }
-            $file->move("upload", $img);
+            $file->move("upload/image", $img);
             $lesson->lesson_image = $img;
         } else {
             $lesson->lesson_image = "";
@@ -99,15 +99,15 @@ class LessonController extends Controller
             }
             $name = $file->getClientOriginalName();
             $img = str_random(4) . "_" . $name;
-            while (file_exists("upload" . $img)) {
+            while (file_exists("upload/image" . $img)) {
                 $img = str_random(4) . "_" . $name;
             }
             if (!empty($lesson->lesson_image)) {
-                unlink("upload/" . $lesson->lesson_image);
-                $file->move("upload", $img);
+                unlink("upload/image" . $lesson->lesson_image);
+                $file->move("upload/image", $img);
                 $lesson->lesson_image = $img;
             } else {
-                $file->move("upload", $img);
+                $file->move("upload/image", $img);
                 $lesson->lesson_image = $img;
             }
         }

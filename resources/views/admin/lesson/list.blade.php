@@ -62,7 +62,7 @@
                                         <td><span class="tbody-text"><h3>{{$num_order}}</h3></span></td>
                                         <td>
                                             <div class="tbody-thumb">
-                                                <img src="upload/{{$lesson -> lesson_image}}" alt="" width="50px">
+                                                <img src="upload/image/{{$lesson -> lesson_image}}" alt="" width="50px">
                                             </div>
                                         </td>
                                         <td ><span class="tbody-text ">{{$lesson -> lesson_name}}</span></td>

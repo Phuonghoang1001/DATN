@@ -26,7 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function question(){
+    public function comment(){
         return $this->hasMany('App\QuestionComment', 'user_id', 'id');
+    }
+
+    public function lessonFavourite(){
+        return $this->hasMany('App\LessonFavourite', 'user_id', 'id');
+    }
+
+    public function lessonPined(){
+        return $this->hasMany('App\LessonPined', 'user_id', 'id');
+    }
+
+    public function userTest(){
+        return $this->hasMany('App\UserTest', 'user_id', 'id');
     }
 }
