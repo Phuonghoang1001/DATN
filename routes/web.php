@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'adminLogin'], function () {
         Route::post('add', 'LessonDetaiController@postAdd');
         Route::get('edit/{id}', 'LessonDetaiController@getEdit');
         Route::post('edit/{id}', 'LessonDetaiController@postEdit');
+        Route::get('delete/{id}', 'LessonDetaiController@getDelete');
     });
 
     Route::group(['prefix' => 'question_test'], function () {

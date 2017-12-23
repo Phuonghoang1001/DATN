@@ -15,9 +15,9 @@ class TableLesson extends Migration
     {
         //
         Schema::create('lesson', function ($table) {
-            $table -> increments('id');
+            $table -> increments('id')->unsigned();
             $table -> string('lesson_name');
-            $table -> string('lesson_content',1000);
+            $table -> text('lesson_content');
             $table -> string('lesson_image');
         });
     }

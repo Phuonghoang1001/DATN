@@ -23,7 +23,7 @@ class LessonController extends Controller
             $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson]);
         } else {
-            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->get()->paginnate(10);
+            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->paginnate(10);
             $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson, 'search' => $search]);
         }

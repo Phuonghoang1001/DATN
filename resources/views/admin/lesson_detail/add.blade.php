@@ -39,8 +39,6 @@
                             </select>
                             <label for="detail_name">Tên học phần</label>
                             <input type="text" name="detail_name" id="detail_name">
-                            <label for="detail_form">Công thức</label>
-                            <textarea class="ckeditor" name="detail_form" id="detail_form"></textarea>
                             <label for="detail_content">Nội dung</label>
                             <textarea class="ckeditor" name="detail_content" id="detail_content"></textarea>
                             <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>

@@ -63,6 +63,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->gender = $request->gender;
         $user->birthday = $request->birthday;
+        $user->image = '';
 
         $user->save();
 

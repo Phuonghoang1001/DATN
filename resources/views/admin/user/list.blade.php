@@ -73,7 +73,7 @@
                     <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
                     <ul id="list-paging" class="fl-right">
                         <li>
-                           {!! $users->link() !!}
+                           {!! $users->links() !!}
                         </li>
                     </ul>
                 </div>

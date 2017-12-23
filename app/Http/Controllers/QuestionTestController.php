@@ -16,7 +16,7 @@ class QuestionTestController extends Controller
         if (empty($search_question)) {
             $list_question_test = QuestionTest::paginate(5);
         } else {
-            $list_question_test = QuestionTest::where('lesson_id', $search_question)->get()->paginate(5);
+            $list_question_test = QuestionTest::where('lesson_id', $search_question)->paginate(5);
         }
         $list_question_test ->withPath('admin/question_test/list');
         return view('admin.question_test.list', ['search_question' => $search_question, 'list_question_test' => $list_question_test, 'lesson' => $lesson]);

@@ -8,6 +8,7 @@ class LessonFavourite extends Model
 {
     //
     protected $table = 'lesson_favourite';
+    public $timestamps = false;
 
     public function lesson(){
         return $this->belongsTo('App\Lesson', 'lesson_id', 'id');

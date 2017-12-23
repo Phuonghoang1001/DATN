@@ -14,14 +14,19 @@ class TableUserTestDetail extends Migration
     public function up()
     {
         //
-        Schema::create('user_test_detail', function($table){
+        Schema::drop('user_test_detail');
+        Schema::create('user_test_detail', function ($table) {
             $table->increments('id');
-            $table->integer('user_test_id')->references('id')->on('user_test');
-            $table->integer('test_id')->references('id')->on('question_test');
+            $table->integer('user_test_id')->unsigned();
+            $table->integer('test_id')->unsigned();
             $table->string('my_answer');
             $table->string('right_answer');
         });
-    }
+        Schema::table('user_test_detail', function($table){
+            $table->foreign('user_test_id')->references('id')->on('user_test');
+            $table->foreign('test_id')->references('id')->on('question_test');
+        });
+        }
 
     /**
      * Reverse the migrations.

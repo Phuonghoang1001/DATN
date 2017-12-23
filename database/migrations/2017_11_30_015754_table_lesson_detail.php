@@ -14,12 +14,16 @@ class TableLessonDetail extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('lesson_detail');
         Schema::create('lesson_detail', function ($table) {
-            $table -> increments('id');
-            $table -> string('detail_name');
-            $table -> string('detail_form');
-            $table -> string('detail_content',3000);
-            $table -> integer('lesson_id')->references('id')->on('lesson');
+            $table->increments('id');
+            $table->string('detail_name');
+            $table->text('detail_content');
+            $table->integer('lesson_id')->unsigned();
+
+        });
+        Schema::table('lesson_detail', function($table) {
+            $table->foreign('lesson_id')->references('id')->on('lesson');
         });
     }
 

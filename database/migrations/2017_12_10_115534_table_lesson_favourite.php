@@ -14,11 +14,15 @@ class TableLessonFavourite extends Migration
     public function up()
     {
         //
-        Schema::create('lesson_favourite', function ($table){
+
+        Schema::create('lesson_favourite', function ($table) {
             $table->increments('id');
-            $table->integer('user_id')->references('id')->on('users');
-            $table->integer('lesson_id')->references('id')->on('lesson');
-            $table->timestamps();
+            $table->integer('user_id')->unsigned();
+            $table->integer('lesson_id')->unsigned();
+        });
+        Schema::table('lesson_favourite', function ($table) {
+            $table->foreign('lesson_id')->references('id')->on('lesson');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

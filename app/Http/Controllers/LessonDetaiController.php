@@ -18,7 +18,7 @@ class LessonDetaiController extends Controller
         if (empty($search_detail)) {
             $list_detail = LessonDetail::paginate(10);
         } else {
-            $list_detail = LessonDetail::where('lesson_id', $search_detail)->get()->paginate(10);
+            $list_detail = LessonDetail::where('lesson_id', $search_detail)->paginate(10);
         }
         $list_detail->withPath('admin/lesson_detail/list');
         return view('admin.lesson_detail.list', ['search_detail' => $search_detail , 'list_detail' => $list_detail, 'lesson' => $lesson]);
@@ -36,13 +36,11 @@ class LessonDetaiController extends Controller
             [
                 'lesson_id' => 'required',
                 'detail_name' => 'required',
-                'detail_form' => 'required',
                 'detail_content' => 'required',
             ],
             [
                 'lesson_id.required' => 'Bạn chưa chọn bài học',
                 'detail_name.required' => 'Bạn chưa nhập tên học phần',
-                'detail_form.required' => 'Bạn chưa nhập công thức',
                 'detail_content.required' => 'Nội dung học phần không được để trống',
 
             ]
@@ -50,7 +48,6 @@ class LessonDetaiController extends Controller
         $detail = new LessonDetail();
         $detail->lesson_id = $request->lesson_id;
         $detail->detail_name = $request->detail_name;
-        $detail->detail_form = $request->detail_form;
         $detail->detail_content = $request->detail_content;
         $detail->save();
         return redirect('admin/lesson_detail/add')->with('msg', 'Thêm mới học phần thành công');
@@ -69,25 +66,19 @@ class LessonDetaiController extends Controller
             [
                 'lesson_id' => 'required',
                 'detail_name' => 'required',
-                'detail_form' => 'required',
                 'detail_content' => 'required',
-                'detail_example' => 'required',
             ],
             [
                 'lesson_id.required' => 'Bạn chưa chọn bài học',
                 'detail_name.required' => 'Bạn chưa nhập tên học phần',
-                'detail_form.required' => 'Bạn chưa nhập công thức',
                 'detail_content.required' => 'Nội dung học phần không được để trống',
-                'detail_example.required' => 'Bạn chưa nhập ví dụ',
 
             ]
         );
         $detail = LessonDetail::find($id);
         $detail->lesson_id = $request->lesson_id;
         $detail->detail_name = $request->detail_name;
-        $detail->detail_form = $request->detail_form;
         $detail->detail_content = $request->detail_content;
-        $detail->detail_example = $request->detail_example;
         $detail->save();
         return redirect('admin/lesson_detail/edit/' . $id)->with('msg', 'Sửa thành công');
     }
@@ -111,7 +102,6 @@ class LessonDetaiController extends Controller
                     $insert[] = [
                         'lesson_id' => $v['lesson_id'],
                         'detail_name' => $v['detail_name'],
-                        'detail_form' => $v['detail_form'],
                         'detail_content' => $v['detail_content'],
                     ];
                 }

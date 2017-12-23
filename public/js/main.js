@@ -144,4 +144,5 @@ $('#user-pin').click(function (event) {
         }
     })
 });
+$('.lesson-detail-content table').addClass('table-bordered');
 

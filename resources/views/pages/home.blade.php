@@ -12,7 +12,7 @@
                     <div class="col-md-4">
                         <div class="course-item clearfix">
                             <a href="lesson/{{$item->id}}.html" class="course-item__link">
-                                <img src="upload/{{$item->lesson_image}}" alt="" class="img-responsive">
+                                <img src="upload/image/{{$item->lesson_image}}" alt="" class="img-responsive">
                             </a>
                             <div class="course-info">
                                 <h4 class="course-item__title"><a  href="lesson/{{$item->id}}.html">{!! $item->lesson_name !!}</a></h4>

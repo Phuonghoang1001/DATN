@@ -14,18 +14,23 @@ class TableQuestionTest extends Migration
     public function up()
     {
         //
+
         Schema::create('question_test', function ($table) {
-            $table -> increments('id');
-            $table -> string('test_content');
-            $table -> string('answer_1',200);
-            $table -> string('answer_2',200);
-            $table -> string('answer_3',200);
-            $table -> string('answer_4',200);
-            $table -> string('right_answer',200);
-            $table -> string('type',200);
-            $table -> string('level',200);
-            $table -> integer('appear');
-            $table -> integer('lesson_id')->references('id')->on('lesson');
+            $table->increments('id');
+            $table->text('test_content');
+            $table->string('answer_1', 200);
+            $table->string('answer_2', 200);
+            $table->string('answer_3', 200);
+            $table->string('answer_4', 200);
+            $table->string('right_answer', 200);
+            $table->string('type', 200);
+            $table->string('level', 200);
+            $table->integer('appear');
+            $table->integer('lesson_id')->unsigned();
+
+        });
+        Schema::table('question_test', function($table) {
+            $table->foreign('lesson_id')->references('id')->on('lesson');
         });
     }
 

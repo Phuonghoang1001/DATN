@@ -14,12 +14,16 @@ class TableUserTest extends Migration
     public function up()
     {
         //
-        Schema::create('user_test', function ($table){
-           $table->increments('id');
-           $table->integer('user_id')->references('id')->on('users');
-           $table->integer('lesson_id')->references('id')->on('lesson');
-           $table->string('score');
-           $table->timestamps()->notnull();
+        Schema::create('user_test', function ($table) {
+            $table->increments('id')->unsigned();
+            $table->string('score');
+            $table->timestamps();
+            $table->integer('user_id')->unsigned();
+            $table->integer('lesson_id')->unsigned();
+        });
+        Schema::table('user_test', function ($table) {
+            $table->foreign('lesson_id')->references('id')->on('lesson');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

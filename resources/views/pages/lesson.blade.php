@@ -22,7 +22,6 @@
                             @foreach($lesson_detail as $item)
                                 <div id="{!!$item->detail_name !!}" class="tabcontent lesson-detail">
                                     <div class="lesson-detail-item">
-                                        <div class="lesson-detail-form">{!! $item->detail_form !!}</div>
                                         <div class="lesson-detail-content">{!! $item->detail_content !!}</div>
                                     </div>
                                 </div>

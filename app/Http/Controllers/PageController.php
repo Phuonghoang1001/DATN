@@ -21,7 +21,7 @@ class PageController extends Controller
     //
     function __construct()
     {
-        $lesson = Lesson::paginate(3);
+        $lesson = Lesson::paginate(6);
         $lesson->withPath('home');
         view()->share('lesson', $lesson);
 
