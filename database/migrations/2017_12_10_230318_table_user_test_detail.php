@@ -14,7 +14,6 @@ class TableUserTestDetail extends Migration
     public function up()
     {
         //
-        Schema::drop('user_test_detail');
         Schema::create('user_test_detail', function ($table) {
             $table->increments('id');
             $table->integer('user_test_id')->unsigned();

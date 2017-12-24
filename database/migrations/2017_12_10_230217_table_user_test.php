@@ -17,9 +17,9 @@ class TableUserTest extends Migration
         Schema::create('user_test', function ($table) {
             $table->increments('id')->unsigned();
             $table->string('score');
-            $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('lesson_id')->unsigned();
+            $table->timestamps();
         });
         Schema::table('user_test', function ($table) {
             $table->foreign('lesson_id')->references('id')->on('lesson');

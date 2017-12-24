@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
 use App\User;
+use Mail;
 
 class UserController extends Controller
 {
     //
+    var $email;
     public function getList(Request $request)
     {
         $users = User::paginate(10);
@@ -59,15 +61,18 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $this->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->gender = $request->gender;
         $user->birthday = $request->birthday;
         $user->image = '';
-
+        $user->active = false;
+//        Mail::send('email.active_account', ['name'=>$request->name , 'pass'=>bcrypt($request->password), 'mail'=> $this->email ], function($msg){
+//            $msg->to($this->email)->subject('Xác nhận tài khoản');
+//        } );
         $user->save();
-
-        return redirect('admin/user/list')->with('msg', 'Thêm mới tài khoản thành công');
+        return redirect('admin/login')->with('msg', 'Chúng tôi đã gửi đường dẫn kích hoạt vào tài khoản của bạn. Vui lòng vào mail để xác nhận');
     }
 
     public function getEdit($id)

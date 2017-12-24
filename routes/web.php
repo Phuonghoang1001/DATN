@@ -19,7 +19,7 @@ Route::get('admin/login', 'userController@getLoginAdmin');
 Route::post('admin/login', 'userController@postLoginAdmin');
 Route::get('admin/logout', 'userController@getLogoutAdmin');
 
-Route::group(['prefix' => 'admin', 'middleware'=>'adminLogin'], function () {
+Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'lesson'], function () {
         Route::get('list', 'lessonController@getList');
         Route::get('add', 'lessonController@getAdd');
@@ -77,6 +77,9 @@ Route::group(['middleware'=>'login'], function(){
     Route::get('tests/{test_id}/load_question.html', 'pageController@loadQuestion');
     Route::post('test/{id}.html', 'pageController@postAnswer');
     Route::post('comment/{id}.html','pageController@postComment');
+    Route::post('reply/{id}','pageController@postReply');
+    Route::post('edit_comment/{id}','pageController@postEditComment');
+    Route::get('delete_comment/{id}','pageController@getDeleteComment');
 });
 
 Route::get('login','pageController@getLogin');

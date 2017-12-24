@@ -5,7 +5,7 @@
     <div class="section" id="title-page">
         <div class="clearfix">
             <a href="?page=add_product" title="" id="add-new" class="fl-left">Thêm mới</a>
-            <h3 id="index" class="fl-left">Thêm sản phẩm</h3>
+            <h3 id="index" class="fl-left">Thêm bài học<    /h3>
         </div>
     </div>
     <div class="wrap clearfix">

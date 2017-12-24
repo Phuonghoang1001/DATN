@@ -3,6 +3,10 @@ body {
     font-size: 14px !important;
     font-family: Montserrat !important;
     background-color: #eef2f8 !important;
+    line-height: 24px;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family:Montserrat !important;
 }
 /*header*/
 .header {
@@ -498,21 +502,35 @@ label {
 }
 
 .item-comment {
-    margin-bottom: 10px;
+    background: #fff;
+    padding: 10px;
+    margin:0px;
+    border-bottom: 1px solid #ddd;
 }
 
 .user-img {
-    width: 10%;
+    width: 40px;
+    height: 40px;
 }
-
-img {
+.user-img img {
     max-width: 100%;
+    border-radius: 50px;
 }
 
 .user-info {
     padding: 0px 10px;
+    width: calc(100% - 70px);
 }
-
+.user-info .reply , .user-info .edit-comment , .user-info .delete-comment{
+    background: no-repeat;
+    border: none;
+    font-size: 12px;
+    color: #999;
+    padding: 5px 15px 5px 0px;
+}
+.user-info .reply:hover , .user-info .edit-comment:hover {
+    color: #1b6d85;
+}
 .user-info p {
     margin: 0px;
 }
@@ -534,7 +552,22 @@ img {
     line-height: 24px;
     font-size: 16px;
 }
-
+.form-edit, .form-reply{
+    width:50%;
+    display: none;
+}
+.form-edit  .form-control,  .form-reply .form-control{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    height: 35px !important;
+    border-right: 0px;
+}
+.form-edit .btn-comment,  .form-reply .btn-comment{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    height: 35px;
+    background: #fff;
+}
 /*------------------------------List page ----------------------------*/
 #detail-page {
     margin: 20px;
@@ -559,4 +592,12 @@ img {
 .form-s input[type=text] {
     border: 1px solid #ddd;
     width: 250px;
+}
+#dataConfirmModal{
+    width: 30%;
+    background: #fff;
+    margin: 180px auto;
+    height: 230px;
+    border-radius: 5px;
+    overflow: hidden;
 }

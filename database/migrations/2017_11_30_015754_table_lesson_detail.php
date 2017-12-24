@@ -14,7 +14,6 @@ class TableLessonDetail extends Migration
     public function up()
     {
         //
-        Schema::dropIfExists('lesson_detail');
         Schema::create('lesson_detail', function ($table) {
             $table->increments('id');
             $table->string('detail_name');

@@ -19,7 +19,6 @@ function muti_level($data, $parent_id=0 , $level=0)
             $child = muti_level($data, $item['id'], $level + 1);
             $result = array_merge($result, $child);
         }
-
     }
     return $result;
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LessonPined extends Model
 {
     //
-    protected $table = 'lesson_pined';
+    protected $table = 'lesson_subscribe';
     public $timestamps = false;
 
     public function lesson(){

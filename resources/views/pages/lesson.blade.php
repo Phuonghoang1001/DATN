@@ -37,17 +37,11 @@
                                             data-original-title="
                                             @if(checkKey($followed,'user_id',Auth::user()->id) &&
                                                 checkKey($followed, 'lesson_id', $lesson_item ->id))
-                                                    Bỏ lưu bài học
-@else
-                                                    Lưu bài học để xem tiếp
-@endif " id="user-pin">
+                                                    Bỏ lưu bài học @else Lưu bài học để xem tiếp @endif " id="user-pin">
                                         <i class="fa
                                             @if(checkKey($followed,'user_id',Auth::user()->id) &&
                                                 checkKey($followed, 'lesson_id', $lesson_item ->id))
-                                                fa-bookmark
-@else
-                                                fa-bookmark-o
-@endif "
+                                                fa-bookmark @else fa-bookmark-o @endif "
                                            aria-hidden="true">
                                         </i>
                                     </button>
@@ -59,17 +53,12 @@
                                             data-original-title="
                                             @if(checkKey($favourite,'user_id',Auth::user()->id) &&
                                                 checkKey($favourite, 'lesson_id', $lesson_item ->id))
-                                                    Bỏ thích
-@else
-                                                    Lưu bài học vào mục yêu thích
-@endif " id="user-favourite">
+                                                    Bỏ thích @else Lưu bài học vào mục yêu thích @endif "
+                                            id="user-favourite">
                                         <i class="fa
                                             @if(checkKey($favourite,'user_id',Auth::user()->id) &&
                                                 checkKey($favourite, 'lesson_id', $lesson_item ->id))
-                                                fa-heart
-@else
-                                                fa-heart-o
-@endif "
+                                                fa-heart @else fa-heart-o @endif "
                                            aria-hidden="true">
                                         </i>
                                     </button>
@@ -131,22 +120,80 @@
                                 <hr>
                                 <div class="list-comment">
                                     <ul>
+                                        {{--Đổ comment--}}
                                         @if(!empty($question_comment))
                                             @foreach($question_comment as $item)
-                                                <li class="item-comment clearfix" @if($item->level != 0) style="padding-left: 90px;" @endif>
+                                                <li class="item-comment clearfix"
+                                                    @if($item->parent_id != 0) style="padding-left: 90px;" @endif>
+                                                    <?php $user = DB::table('users')->where('id', $item->user_id)->first()?>
+                                                    @if(empty($user->image))
                                                     <div class="user-img pull-left">
-                                                        <img src="images/img_giaotiep.jpg">
+                                                        <img src="images/unknown-user.png">
                                                     </div>
+                                                        @else
+                                                            <div class="user-img pull-left">
+                                                                <img src="upload/image/{!! $user->image !!}">
+                                                            </div>
+                                                        @endif
                                                     <div class="user-info pull-left">
                                                         <p>
-                                                        <span class="user-name"><?php $user = DB::table('users')->where('id', $item->user_id)->first()?>
-                                                            @if(!empty($user))
-                                                                {!! $user->name !!}
-                                                            @endif
+                                                            {{--hiển thị người comment--}}
+                                                            <span class="user-name">
+                                                                @if(!empty($user))
+                                                                    {!! $user->name !!}
+                                                                @endif
                                                         </span>
                                                             <span class="published">{!! $item -> created_at !!}</span>
                                                         </p>
                                                         <p class="comment-content">{!! $item->content !!}</p>
+                                                        @if($item->parent_id == 0)
+                                                            <button class="reply" id="reply_{!! $item->id !!}">Trả lời</button>
+                                                        @endif
+                                                        @if($item->user_id ==Auth::user()->id)
+                                                        <a href="delete_comment/{!! $item->id !!}"
+                                                           data-confirm ="Bạn có chắc chắn muốn xóa ?"
+                                                           class="delete-comment"  >Xóa</a>
+                                                        @endif
+                                                        <button class="edit-comment " @if($item->user_id !=Auth::user()->id) disabled data-toggle="tooltip"
+                                                                data-placement="top"
+                                                                title=" Không được phép chỉnh sửa bình luận này" @endif>Chỉnh sửa</button>
+                                                        {{--form chỉnh sửa bình luận--}}
+                                                        <form action="edit_comment/{!! $item->id !!}" class="form-edit"
+                                                              method="POST">
+                                                            <input type="hidden" name="_token"
+                                                                   value="{!! csrf_token() !!}">
+                                                            <div class="input-group">
+                                                                <input type="text" name="comment_edit" id="comment"
+                                                                       class="form-control"
+                                                                       value="{!! $item->content !!}">
+                                                                <span class="input-group-btn">
+                                                                        <button class="btn btn-secondary btn-comment"
+                                                                                name="btn-comment"
+                                                                                type="submit"><i
+                                                                                    class="fa fa-paper-plane"></i></button>
+                                                                    </span>
+                                                            </div>
+                                                        </form>
+                                                        {{--form trả lời bình luận--}}
+                                                        <form action="reply/{!! $item->id !!}" method="POST"
+                                                               class="form-reply form-comment" id="form_{!! $item->id !!}">
+                                                            <input type="hidden" name="_token"
+                                                                   value="{!! csrf_token() !!}">
+                                                            <input type="hidden" name="parent"
+                                                                   value="{!! $item->id !!}">
+                                                            <div class="input-group">
+                                                                <input type="text" name="comment" id="comment"
+                                                                       class="form-control"
+                                                                       placeholder="Trả lời">
+                                                                <span class="input-group-btn">
+                                                                        <button class="btn btn-secondary btn-comment"
+                                                                                name="btn-comment"
+                                                                                type="submit"><i
+                                                                                    class="fa fa-paper-plane"></i></button>
+                                                                    </span>
+                                                            </div>
+                                                        </form>
+
                                                     </div>
                                                 </li>
                                             @endforeach

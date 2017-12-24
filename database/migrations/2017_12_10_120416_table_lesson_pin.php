@@ -14,12 +14,12 @@ class TableLessonPin extends Migration
     public function up()
     {
         //
-        Schema::create('lesson_pined', function ($table){
+        Schema::create('lesson_subscribe', function ($table){
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table -> integer('lesson_id')->unsigned();
         });
-        Schema::table('lesson_pined', function($table) {
+        Schema::table('lesson_subscribe', function($table) {
             $table->foreign('lesson_id')->references('id')->on('lesson');
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -33,6 +33,6 @@ class TableLessonPin extends Migration
     public function down()
     {
         //
-        Schema::drop('lesson_pined');
+        Schema::drop('lesson_subscribe');
     }
 }

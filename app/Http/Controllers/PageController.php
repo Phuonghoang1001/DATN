@@ -42,13 +42,12 @@ class PageController extends Controller
         $lesson_detail = LessonDetail::where('lesson_id', $id)->get();
         $question_test = QuestionTest::where('lesson_id', $id)->where('level', 'easy')->get();
         $question_comment = QuestionComment::where('lesson_id', $id)->get();
-        $multi_level = muti_level($question_comment);
         return view('pages.lesson',
             [
                 'lesson_item' => $lesson_item,
                 'lesson_detail' => $lesson_detail,
                 'question_test' => $question_test,
-                'question_comment' => $multi_level,
+                'question_comment' => muti_level($question_comment),
                 'favourite' => $favourite,
                 'followed' => $followed
             ]);
@@ -226,8 +225,45 @@ class PageController extends Controller
         $question_comment->parent_id = 0;
         $question_comment->user_id = Auth::user()->id;
         $question_comment->lesson_id = $id;
-        $question_comment->status = 'Chưa duyệt';
+        $question_comment->status = 'Chưa trả lời';
         $question_comment->save();
         return redirect('lesson/' . $id . '.html');
+    }
+    function postReply(Request $request, $id)
+    {
+        //update status parent_id
+        QuestionComment::where('id', $id)->update(['status' => "Đã trả lời"]);
+        $question = QuestionComment::find($id);
+        //Add reply
+        $reply = new QuestionComment();
+        $reply->lesson_id = $question->lesson_id;
+        $reply->content = $request->comment;
+        $reply->user_id = Auth::user()->id;
+        $reply->parent_id = $id;
+        $reply->status = 'Đã trả lời';
+        $reply->save();
+        return redirect()->back();
+    }
+    function postEditComment(Request $request, $id)
+    {
+        $question = QuestionComment::find($id);
+        $question->content = $request->comment_edit;
+        $question->user_id = Auth::user()->id;
+        $question->save();
+        return redirect()->back();
+    }
+    function getDeleteComment($id){
+        $comment=QuestionComment::find($id);
+        $child = QuestionComment::where('parent_id', $id)->get();
+        if (!empty($child)){
+            foreach($child as $item){
+                $item->delete();
+            }
+            $comment->delete();
+        }else{
+            $comment->delete();
+        }
+
+        return redirect()->back();
     }
 }

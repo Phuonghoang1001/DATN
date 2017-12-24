@@ -144,5 +144,28 @@ $('#user-pin').click(function (event) {
         }
     })
 });
+$('.delete-comment').click(function (){
+    var myUrl = $(this).data('href');
+    console.log(myUrl);
+    $.ajax({
+        method: 'GET',
+        url: myUrl,
+        dataType: 'text',
+        success: function(data){
+            console.log('Xóa thành công');
+        },
+        error: function (data) {
+            console.log('request failed');
+        }
+    })
+})
 $('.lesson-detail-content table').addClass('table-bordered');
-
+$('.reply').click(function (e) {
+    e.currentTarget;
+    id = e.currentTarget.id;
+    id_form = id.slice('6');
+    form = $('#form_' + id_form).toggle();
+});
+$('.edit-comment').click(function () {
+    $(this).next().toggle();
+})
