@@ -149,13 +149,12 @@
                                                         @if($item->parent_id == 0)
                                                             <button class="reply" id="reply_{!! $item->id !!}">Trả lời</button>
                                                         @endif
-                                                        @if($item->user_id ==Auth::user()->id)
+
                                                         <a href="delete_comment/{!! $item->id !!}"
-                                                           data-confirm ="Bạn có chắc chắn muốn xóa ?"
-                                                           class="delete-comment"  >Xóa</a>
-                                                        @endif
-                                                        <button class="edit-comment " @if($item->user_id !=Auth::user()->id) disabled data-toggle="tooltip"
-                                                                data-placement="top"
+                                                            @if($item->user_id !=Auth::user()->id) data-role-delete="Bạn không có quyền xóa bình luận này" @else data-confirm ="Bạn có chắc chắn muốn xóa ?" @endif
+                                                           class="delete-comment">Xóa</a>
+
+                                                        <button class="edit-comment " @if($item->user_id !=Auth::user()->id)
                                                                 title=" Không được phép chỉnh sửa bình luận này" @endif>Chỉnh sửa</button>
                                                         {{--form chỉnh sửa bình luận--}}
                                                         <form action="edit_comment/{!! $item->id !!}" class="form-edit"

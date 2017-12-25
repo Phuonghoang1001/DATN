@@ -16,9 +16,9 @@ class LessonDetaiController extends Controller
         $lesson = Lesson::all();
         $search_detail = $request->search_detail;
         if (empty($search_detail)) {
-            $list_detail = LessonDetail::paginate(10);
+            $list_detail = LessonDetail::orderBy('id','DESC')->paginate(10);
         } else {
-            $list_detail = LessonDetail::where('lesson_id', $search_detail)->paginate(10);
+            $list_detail = LessonDetail::where('lesson_id', $search_detail)->orderBy('id','DESC')->paginate(10);
         }
         $list_detail->withPath('admin/lesson_detail/list');
         return view('admin.lesson_detail.list', ['search_detail' => $search_detail , 'list_detail' => $list_detail, 'lesson' => $lesson]);

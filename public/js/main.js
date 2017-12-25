@@ -169,3 +169,13 @@ $('.reply').click(function (e) {
 $('.edit-comment').click(function () {
     $(this).next().toggle();
 })
+
+$('button[title]').click(function(ev) {
+    if (!$('#dataRoleModal').length) {
+        $('body').append('<div id="dataRoleModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">Please Confirm</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">OK</button></div></div>');
+    }
+    $('#dataRoleModal').find('.modal-body').text($(this).attr('title'));
+    $('#dataRoleModal').modal({show:true});
+    $(this).next().hide();
+    return false;
+});

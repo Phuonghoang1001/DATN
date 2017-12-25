@@ -75,6 +75,7 @@
                                             <span class="tbody-text">
                                                 <ul class="list-operation">
                                                 <li><a href="admin/question_comment/edit/{{$item->id}}" title="Sửa"
+                                                       @if($item->user_id != Auth::user()->id) data-role-delete = "Bạn không có quyền sửa bình luận này" @endif
                                                        class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li><a href="admin/question_comment/delete/{{$item->id}}" title="Xóa"

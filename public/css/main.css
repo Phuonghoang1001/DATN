@@ -71,6 +71,11 @@ h1,h2,h3,h4,h5,h6{
     display: inline-block;
     padding-bottom: 5px;
     border-bottom: 2px solid;
+    transition: 0.3s;
+}
+.course-item__title a:hover{
+    text-decoration: none;
+    color: #fecb00;
 }
 .course-item:hover .course-item__link img {
     transform: scale(1.02);
@@ -593,7 +598,7 @@ label {
     border: 1px solid #ddd;
     width: 250px;
 }
-#dataConfirmModal{
+#dataConfirmModal, #dataRoleModal{
     width: 30%;
     background: #fff;
     margin: 180px auto;

@@ -12,7 +12,7 @@ class QuestionCommentController extends Controller
     //
     public function __construct()
     {
-        $list_comment = QuestionComment::paginate(10);
+        $list_comment = QuestionComment::orderBy('id','DESC')->paginate(10);
         $list_comment->withPath('admin/question_comment/list');
         view()->share('list_comment', $list_comment);
         $list_multi = muti_level($list_comment);
@@ -56,7 +56,21 @@ class QuestionCommentController extends Controller
 
         return redirect('admin/question_comment/list')->with('msg', 'Giải đáp thành công');
     }
-
+    public function getEdit($id){
+        $comment = QuestionComment::find($id);
+        return view('admin.question_user.edit', ['comment'=>$comment]);
+    }
+    public function postEdit(Request $request, $id){
+        QuestionComment::where('id', $request->parent_id)->update(['status' => "Đã trả lời"]);
+        $question = QuestionComment::find($request->parent_id);
+        $comment = QuestionComment::find($id);
+        //Add reply
+        $comment->lesson_id = $question->lesson_id;
+        $comment->content = $request->content_reply;
+        $comment->parent_id = $request->parent_id;
+        $comment->save();
+        return redirect('admin/question_comment/list')->with('msg', 'Sửa trả lời bình luận thành công');
+    }
     public function getDelete($id)
     {
         $question = QuestionComment::find($id);

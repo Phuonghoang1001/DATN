@@ -97,7 +97,6 @@
     max-height: 100%;
     overflow: hidden;
 }
-.list-operation{ width: 25%;}
 #paging-wp #desc{
     font-size: 13px;
     color: #b5b5b5;
@@ -170,7 +169,7 @@
 .form-s input[type="file"]{
     display:inline-block;
 }
-#dataConfirmModal{
+#dataConfirmModal, #dataRoleModal{
     width: 20%;
     background: #fff;
     margin: 180px auto;

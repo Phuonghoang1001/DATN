@@ -19,11 +19,11 @@ class LessonController extends Controller
         $search = $request->search;
 
         if (empty($search)) {
-            $list_lesson = Lesson::paginate(10);
+            $list_lesson = Lesson::orderBy('id','DESC')->paginate(10);
             $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson]);
         } else {
-            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->paginnate(10);
+            $list_lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->orderBy('id','DESC')->paginate(10);
             $list_lesson->withPath('admin/lesson/list');
             return view('admin.lesson.list', ['list_lesson' => $list_lesson, 'search' => $search]);
         }

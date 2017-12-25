@@ -29,7 +29,7 @@
                         @endif
                         <form method="POST" action="admin/question_comment/add" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <label for="detail_name">Tên bài học</label>
+                            <label for="detail_name">Comment cần trả lời</label>
                             <select name="parent_id" id="parent_id">
                                 <option value="0">------Chọn------</option>
 
