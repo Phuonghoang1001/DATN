@@ -19,9 +19,14 @@ class UserController extends Controller
     var $email;
     public function getList(Request $request)
     {
-        $users = User::paginate(10);
+        $search_email = $request->search;
+        if(!empty($search_email)) {
+            $users = User::where('email','Like', '%' . $search_email . '%')->paginate(10);
+        }else{
+            $users = User::paginate(10);
+        }
         $users->withPath('admin/user/list');
-        return view('admin.user.list', ['users' => $users]);
+        return view('admin.user.list', ['users' => $users, 'search_email'=>$search_email]);
     }
 
     public function getRegister()

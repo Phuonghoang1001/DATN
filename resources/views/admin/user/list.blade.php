@@ -26,8 +26,8 @@
                 <div class="section-detail">
                     <div class="filter-wp clearfix">
                         <form method="GET" action="admin/user/list" class="form-s fl-left">
+                            <input type="text" name="search" id="search" placeholder="Nhập email muốn tìm" value="{!! $search_email !!}">
                             <input type="submit" name="sm_s" value="Tìm kiếm">
-                            <input type="text" name="search" id="search">
                         </form>
 
                     </div>

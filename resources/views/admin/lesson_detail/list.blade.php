@@ -32,15 +32,16 @@
                                         <option @if($search_detail == $item->id){{"selected"}} @endif value="{!! $item->id !!}">{!! $item ->lesson_name !!}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="search" value="" placeholder="Nhập học phần muốn tìm">
                                 <input type="submit" name="sm_s" value="Tìm kiếm">
                             </form>
-                            <form method="POST" action="{{url('/admin/lesson_detail/import_data')}}"
-                                  enctype="multipart/form-data" class="form-s fl-right">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <p style="color: red">{!! $errors->first('import_data') !!}</p>
-                                <input type="file" name="import_file"/>
-                                <button class="btn btn-primary">Import File</button>
-                            </form>
+                            {{--<form method="POST" action="{{url('/admin/lesson_detail/import_data')}}"--}}
+                                  {{--enctype="multipart/form-data" class="form-s fl-right">--}}
+                                {{--<input type="hidden" name="_token" value="{{csrf_token()}}">--}}
+                                {{--<p style="color: red">{!! $errors->first('import_data') !!}</p>--}}
+                                {{--<input type="file" name="import_file"/>--}}
+                                {{--<button class="btn btn-primary">Import File</button>--}}
+                            {{--</form>--}}
                         </div>
                         <div class="table-responsive">
                             <table class="table list-table-wp table-bordered">

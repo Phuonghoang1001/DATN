@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\QuestionComment;
@@ -10,14 +11,27 @@ use App\User;
 class QuestionCommentController extends Controller
 {
     //
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $list_comment = QuestionComment::orderBy('id','DESC')->paginate(10);
+        $lesson = Lesson::all();
+        $search_question = $request->search_question;
+        $search_status = $request->search_status;
+        if (!empty($search_question)){
+            if(!empty($search_status)){
+                $list_comment = QuestionComment::orderBy('id','DESC')->where('lesson_id',$search_question)->where('status',$search_status)->paginate(10);
+            }else{
+                $list_comment = QuestionComment::orderBy('id','DESC')->where('lesson_id',$search_question)->paginate(10);
+            }
+        }else{
+            $list_comment = QuestionComment::orderBy('id','DESC')->paginate(10);
+        }
         $list_comment->withPath('admin/question_comment/list');
         view()->share('list_comment', $list_comment);
         $list_multi = muti_level($list_comment);
         view()->share('list_multi', $list_multi);
-
+        view()->share('lesson', $lesson);
+        view()->share('search_question',$search_question);
+        view()->share('search_status',$search_status);
     }
 
     public function getList()

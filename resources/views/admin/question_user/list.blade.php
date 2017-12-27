@@ -25,15 +25,20 @@
                     @endif
                     <div class="section-detail">
                         <div class="filter-wp clearfix">
-                            {{--<form method="GET" class="form-s fl-left">--}}
-                            {{--<select name="search_question">--}}
-                            {{--<option value="">--Chọn bài học--</option>--}}
-                            {{--@foreach($lesson as $item)--}}
-                            {{--<option @if($search_question == $item->id){{"selected"}} @endif value="{!! $item->id !!}">{!! $item ->lesson_name !!}</option>--}}
-                            {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--<input type="submit" name="sm_s" value="Tìm kiếm">--}}
-                            {{--</form>--}}
+                            <form method="GET" class="form-s fl-left">
+                                <select name="search_question">
+                                    <option value="">--Chọn bài học--</option>
+                                    @foreach($lesson as $item)
+                                        <option @if($search_question == $item->id){{"selected"}} @endif value="{!! $item->id !!}">{!! $item ->lesson_name !!}</option>
+                                    @endforeach
+                                </select>
+                                <select name="search_status">
+                                    <option value="">--Chọn bài học--</option>
+                                    <option value="chưa trả lời" @if($search_status == "chưa trả lời") {!! 'selected' !!} @endif>Chưa trả lời</option>
+                                    <option value="đã trả lời" @if($search_status == "đã trả lời") {!! 'selected' !!} @endif>Đã trả lời</option>
+                                </select>
+                                <input type="submit" name="sm_s" value="Tìm kiếm">
+                            </form>
                         </div>
                         <div class="table-responsive">
                             <table class="table list-table-wp table-bordered">
@@ -62,7 +67,7 @@
                                                 @endif
                                             </span>
                                             </td>
-                                            <td ><span
+                                            <td><span
                                                         class="tbody-text ">
                                                 <?php $user = DB::table('users')->where('id', $item->user_id)->first();?>
                                                     @if(!empty($user))
@@ -75,11 +80,13 @@
                                             <span class="tbody-text">
                                                 <ul class="list-operation">
                                                 <li><a href="admin/question_comment/edit/{{$item->id}}" title="Sửa"
-                                                       @if($item->user_id != Auth::user()->id) data-role-delete = "Bạn không có quyền sửa bình luận này" @endif
+                                                       @if($item->user_id != Auth::user()->id) data-role-delete="Bạn không có quyền sửa bình luận này"
+                                                       @endif
                                                        class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                                 </li>
                                                 <li><a href="admin/question_comment/delete/{{$item->id}}" title="Xóa"
-                                                       data-confirm ="Bạn có chắc chắn muốn xóa ?"    class="delete"><i class="fa fa-trash" aria-hidden="true" ></i></a>
+                                                       data-confirm="Bạn có chắc chắn muốn xóa ?" class="delete"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </li>
                                             </ul>
                                             </span>

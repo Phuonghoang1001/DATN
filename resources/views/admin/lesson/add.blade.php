@@ -5,7 +5,7 @@
     <div class="section" id="title-page">
         <div class="clearfix">
             <a href="?page=add_product" title="" id="add-new" class="fl-left">Thêm mới</a>
-            <h3 id="index" class="fl-left">Thêm bài học<    /h3>
+            <h3 id="index" class="fl-left">Thêm bài học </h3>
         </div>
     </div>
     <div class="wrap clearfix">
@@ -30,13 +30,13 @@
                     <form method="POST" action="admin/lesson/add" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <label for="lesson_name">Tên bài học</label>
-                        <input type="text" name="lesson_name" id="lesson_name">
+                        <input type="text" name="lesson_name" id="lesson_name" value="{!! old('lesson_name') !!}">
                         <label>Hình ảnh</label>
                         <div id="lesson_img">
-                            <input type="file" name="lesson_img" id="lesson_img" >
+                            <input type="file" name="lesson_img" id="lesson_img" value="{!! old('lesson_img') !!}">
                         </div>
                         <label for="lesson_content">Nội dung</label>
-                        <textarea class="ckeditor" name="lesson_content" id="lesson_content"></textarea>
+                        <textarea class="ckeditor" name="lesson_content" id="lesson_content">{!! old('lesson_content') !!}</textarea>
                         <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
                     </form>
                 </div>
