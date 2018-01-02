@@ -138,15 +138,12 @@ h1,h2,h3,h4,h5,h6{
 .side-bar-item a{
     color: #fff;
     display: block;
-    -webkit-transition: 0.8s time;
-    -moz-transition: 0.8s time;
-    -ms-transition: 0.8s time;
-    -o-transition: 0.8s time;
-    transition: 0.8s time;
+    transition: 0.3s ;
 }
 .side-bar-item a:hover{
     color: #fecb00;
     padding-left: 10px;
+    text-decoration: none;
 }
 .lesson-single{
     background-color: #fff;
@@ -597,6 +594,28 @@ label {
 .form-s input[type=text] {
     border: 1px solid #ddd;
     width: 250px;
+}
+.form-s input[type=date]{
+    border:1px solid #ddd;
+}
+.form-s select{height:40px;}
+
+.navbar .form-s input, .navbar .form-s button{height: 40px;}
+
+.navbar .form-s{
+    margin: 4px 15px;
+    position: relative;
+}
+.navbar .form-s input{
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+.navbar .form-s button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
 }
 #dataConfirmModal, #dataRoleModal{
     width: 30%;

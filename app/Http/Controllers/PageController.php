@@ -15,16 +15,23 @@ use App\LessonPined;
 use App\UserTest;
 use App\UserTestDetail;
 use Illuminate\Support\Facades\Auth;
-
+use Mail;
 class PageController extends Controller
 {
-    //
-    function __construct()
+//
+var $email;
+var $code_active;
+    function __construct(Request $request)
     {
-        $lesson = Lesson::paginate(6);
+        $search = $request->search;
+        if (empty($search)) {
+            $lesson = Lesson::paginate(6);
+        } else {
+            $lesson = Lesson::where('lesson_name', 'Like', '%' . $search . '%')->paginate(6);
+        }
         $lesson->withPath('home');
         view()->share('lesson', $lesson);
-
+        view()->share('search', $search);
         $lesson_detail = LessonDetail::all();
         view()->share('lesson_detail', $lesson_detail);
     }
@@ -65,7 +72,7 @@ class PageController extends Controller
         if (empty($level)) {
             $question_test = '';
         } else {
-            $question_test = QuestionTest::where('lesson_id', $test_id)->where('level', $level)->get();
+            $question_test = QuestionTest::where('lesson_id', $test_id)->where('level', $level)->limit(5)->get();
         }
         $lesson_item = Lesson::find($test_id);
         return view('pages.load_question', ['question_test' => $question_test, 'lesson_item' => $lesson_item, 'level' => $level]);
@@ -75,7 +82,7 @@ class PageController extends Controller
     {
         $level = $request->level;
         $lesson_item = Lesson::find($id);
-        $question_test = QuestionTest::where('lesson_id', $id)->where('level', $level)->get();
+        $question_test = QuestionTest::where('lesson_id', $id)->where('level', $level)->limit(5)->get();
         $correct = array();
         $wrong = array();
         $answer_question = array();
@@ -106,7 +113,7 @@ class PageController extends Controller
 
         //Tính điểm và lưu bài kiểm tra
         if (!empty($correct) && !empty($wrong)) {
-            $score = count($correct).'/'.count($question_test);
+            $score = count($correct) . '/' . count($question_test);
         } else {
             $score = 0;
         }
@@ -208,62 +215,77 @@ class PageController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $this->email= $request->email;
         $user->password = bcrypt($request->password);
         $user->role = "student";
         $user->gender = $request->gender;
         $user->birthday = $request->birthday;
-
+        $this->code_active = $user->code_active = str_random(16);
+        $user->active = false;
+        Mail::send('email.active_account', ['name' => $request->name, 'pass' => $this->code_active, 'mail' => $this->email], function ($msg) {
+            $msg->to($this->email)->subject('Xác nhận tài khoản');
+        });
         $user->save();
+        return redirect('login')->with('msg', 'Chúng tôi đã gửi đường dẫn kích hoạt vào tài khoản của bạn. Vui lòng vào mail để xác nhận');
+    }
 
+    public function getActive($password)
+    {
+        $user = User::where('code_active', $password)->update(['active' => true]);
         return redirect('login');
     }
+}
 
-    function postComment(Request $request, $id)
-    {
-        $question_comment = new QuestionComment();
-        $question_comment->content = $request->comment;
-        $question_comment->parent_id = 0;
-        $question_comment->user_id = Auth::user()->id;
-        $question_comment->lesson_id = $id;
-        $question_comment->status = 'Chưa trả lời';
-        $question_comment->save();
-        return redirect('lesson/' . $id . '.html');
-    }
-    function postReply(Request $request, $id)
-    {
-        //update status parent_id
-        QuestionComment::where('id', $id)->update(['status' => "Đã trả lời"]);
-        $question = QuestionComment::find($id);
-        //Add reply
-        $reply = new QuestionComment();
-        $reply->lesson_id = $question->lesson_id;
-        $reply->content = $request->comment;
-        $reply->user_id = Auth::user()->id;
-        $reply->parent_id = $id;
-        $reply->status = 'Đã trả lời';
-        $reply->save();
-        return redirect()->back();
-    }
-    function postEditComment(Request $request, $id)
-    {
-        $question = QuestionComment::find($id);
-        $question->content = $request->comment_edit;
-        $question->user_id = Auth::user()->id;
-        $question->save();
-        return redirect()->back();
-    }
-    function getDeleteComment($id){
-        $comment=QuestionComment::find($id);
-        $child = QuestionComment::where('parent_id', $id)->get();
-        if (!empty($child)){
-            foreach($child as $item){
-                $item->delete();
-            }
-            $comment->delete();
-        }else{
-            $comment->delete();
+function postComment(Request $request, $id)
+{
+    $question_comment = new QuestionComment();
+    $question_comment->content = $request->comment;
+    $question_comment->parent_id = 0;
+    $question_comment->user_id = Auth::user()->id;
+    $question_comment->lesson_id = $id;
+    $question_comment->status = 'Chưa trả lời';
+    $question_comment->save();
+    return redirect('lesson/' . $id . '.html');
+}
+
+function postReply(Request $request, $id)
+{
+    //update status parent_id
+    QuestionComment::where('id', $id)->update(['status' => "Đã trả lời"]);
+    $question = QuestionComment::find($id);
+    //Add reply
+    $reply = new QuestionComment();
+    $reply->lesson_id = $question->lesson_id;
+    $reply->content = $request->comment;
+    $reply->user_id = Auth::user()->id;
+    $reply->parent_id = $id;
+    $reply->status = 'Đã trả lời';
+    $reply->save();
+    return redirect()->back();
+}
+
+function postEditComment(Request $request, $id)
+{
+    $question = QuestionComment::find($id);
+    $question->content = $request->comment_edit;
+    $question->user_id = Auth::user()->id;
+    $question->save();
+    return redirect()->back();
+}
+
+function getDeleteComment($id)
+{
+    $comment = QuestionComment::find($id);
+    $child = QuestionComment::where('parent_id', $id)->get();
+    if (!empty($child)) {
+        foreach ($child as $item) {
+            $item->delete();
         }
-
-        return redirect()->back();
+        $comment->delete();
+    } else {
+        $comment->delete();
     }
+
+    return redirect()->back();
+
 }

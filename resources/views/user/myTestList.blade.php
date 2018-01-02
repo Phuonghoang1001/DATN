@@ -32,9 +32,15 @@
                         @endif
                         <div class="section-detail">
                             <div class="filter-wp clearfix">
-                                <form method="GET" action="admin/lesson/list" class="form-s fl-left">
+                                <form method="GET" action="user/myTestList" class="form-s fl-left">
+                                    <select name="select_lesson">
+                                        <option value="">--Chọn bài học--</option>
+                                        @foreach($lesson as $item)
+                                            <option @if($select_lesson == $item->id){{"selected"}} @endif value="{!! $item->id !!}">{!! $item ->lesson_name !!}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="date" name="date" placeholder="yyyy-mm-dd">
                                     <input type="submit" name="sm_s" value="Tìm kiếm">
-                                    <input type="text" name="search" id="search">
                                 </form>
 
                             </div>

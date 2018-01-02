@@ -153,6 +153,7 @@ class QuestionTestController extends Controller
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function ($reader) {
             })->get();
+
             if (!empty($data) && count($data)) {
                 foreach ($data->toArray() as $key => $v) {
                     $insert[] = [

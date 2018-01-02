@@ -27,7 +27,7 @@
                                 {{session('msg')}}
                             </div>
                         @endif
-                        <form method="POST" action="admin/user/register" enctype="multipart/form-data">
+                        <form method="POST" action="admin/register" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                             <label for="name">Họ tên</label>

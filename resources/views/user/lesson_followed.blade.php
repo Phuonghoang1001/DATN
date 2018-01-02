@@ -32,10 +32,6 @@
                         @endif
                         <div class="section-detail">
                             <div class="filter-wp clearfix">
-                                <form method="GET" action="admin/lesson/list" class="form-s fl-left">
-                                    <input type="submit" name="sm_s" value="Tìm kiếm">
-                                    <input type="text" name="search" id="search">
-                                </form>
 
                             </div>
                             <div class="table-responsive">
@@ -44,7 +40,6 @@
                                     <tr>
                                         <td><span class="thead-text">STT</span></td>
                                         <td><span class="thead-text">Tên bài học</span></td>
-                                        <td><span class="thead-text">Thời gian</span></td>
                                         <td><span class="thead-text">Bỏ theo dõi</span></td>
                                     </tr>
                                     </thead>
@@ -64,7 +59,6 @@
                                                 </a>
                                                 </span>
                                                 </td>
-                                                <td><span class="tbody-text">{!! $item -> created_at !!}</span></td>
                                                 <td><span class="tbody-text "></span>
                                                     <a href="user/lesson_follow_delete/{!! $item->id !!}"
                                                        title="Bỏ theo dõi"><i

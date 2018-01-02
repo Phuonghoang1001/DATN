@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => 'phuonghoang100195@gmail.com',
+    'username' => env('MAIL_USERNAME', ''),
 
-    'password' => 'phuongphuong',
+    'password' => env('MAIL_PASSWORD', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -120,4 +120,11 @@ return [
         ],
     ],
 
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
 ];

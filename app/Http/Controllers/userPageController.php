@@ -102,23 +102,57 @@ class userPageController extends Controller
     }
 
     //get list my comment
-    public function getMyComment()
+    public function getMyComment(Request $request)
     {
-        $user_commment = QuestionComment::where('user_id', Auth::user()->id)->get()->toArray();
-        foreach ($user_commment as $item){
-            $reply = QuestionComment::where('parent_id',$item['id'])->get()->toArray();
+        $lesson = Lesson::all();
+        $status = $request->select_status;
+        $select_lesson = $request->select_lesson;
+        if (empty($status)) {
+            if (empty($select_lesson)) {
+                $user_commment = QuestionComment::where('user_id', Auth::user()->id)->get()->toArray();
+            } else {
+                $user_commment = QuestionComment::where('user_id', Auth::user()->id)->where('lesson_id', $select_lesson)->get()->toArray();
+            }
+        } else {
+            if (empty($select_lesson)) {
+                $user_commment = QuestionComment::where('user_id', Auth::user()->id)->where('status', $status)->get()->toArray();
+            } else {
+                $user_commment = QuestionComment::where('user_id', Auth::user()->id)->where('status', $status)->where('lesson_id', $select_lesson)->get()->toArray();
+
+            }
         }
-        $list_comment = array_merge($user_commment, $reply);
-        var_dump($list_comment);
-        $multi_level = muti_level($list_comment);
-        return view('user.myComment', ['listComment' => $multi_level]);
+        foreach ($user_commment as $item) {
+            $reply = QuestionComment::where('parent_id', $item['id'])->get()->toArray();
+        }
+        if (!empty($reply)) {
+            $list_comment = array_merge($user_commment, $reply);
+            $multi_level = muti_level($list_comment);
+        } else {
+            $multi_level = muti_level($user_commment);
+        }
+        return view('user.myComment', ['listComment' => $multi_level, 'search_status' => $status, 'select_lesson' => $select_lesson, 'lesson' => $lesson]);
 
     }
 
-    public function getMyTestList()
+    public function getMyTestList(Request $request)
     {
-        $test_list = UserTest::where('user_id', Auth::user()->id)->get();
-        return view('user.myTestList', ['test_list' => $test_list]);
+        $select_lesson = $request->select_lesson;
+        $date = $request->date;
+        $lesson = Lesson::all();
+        if (empty($select_lesson)) {
+            if (empty($date)) {
+                $test_list = UserTest::where('user_id', Auth::user()->id)->get();
+            } else {
+                $test_list = UserTest::where('user_id', Auth::user()->id)->where('created_at', 'Like', '%' . $date . '%')->get();
+            }
+        } else {
+            if (empty($date)) {
+                $test_list = UserTest::where('user_id', Auth::user()->id)->where('lesson_id', $select_lesson)->get();
+            } else {
+                $test_list = UserTest::where('user_id', Auth::user()->id)->where('lesson_id', $select_lesson)->where('created_at', 'Like', '%' . $date . '%')->get();
+            }
+        }
+        return view('user.myTestList', ['test_list' => $test_list, 'select_lesson' => $select_lesson, 'lesson' => $lesson]);
     }
 
     public function getMyTestDetail($id)

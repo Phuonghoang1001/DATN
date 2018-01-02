@@ -3,7 +3,7 @@
     <section class="main">
         <div class="container">
             <header class="course-header">
-                <h1 class="course-header__title">Khóa học của tôi</h1>
+                <h1 class="course-header__title">Bài học của tôi</h1>
                 <div class="header__line"></div>
             </header>
             <div class="course-main">

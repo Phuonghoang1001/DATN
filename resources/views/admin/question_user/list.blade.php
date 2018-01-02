@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                                 <select name="search_status">
-                                    <option value="">--Chọn bài học--</option>
+                                    <option value="">--Chọn trạng thái--</option>
                                     <option value="chưa trả lời" @if($search_status == "chưa trả lời") {!! 'selected' !!} @endif>Chưa trả lời</option>
                                     <option value="đã trả lời" @if($search_status == "đã trả lời") {!! 'selected' !!} @endif>Đã trả lời</option>
                                 </select>

@@ -17,6 +17,7 @@ class UserController extends Controller
 {
     //
     var $email;
+    var $code_active;
     public function getList(Request $request)
     {
         $search_email = $request->search;
@@ -71,13 +72,18 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->gender = $request->gender;
         $user->birthday = $request->birthday;
-        $user->image = '';
+        $this->code_active =  $user->code_active = str_random(16);
         $user->active = false;
-//        Mail::send('email.active_account', ['name'=>$request->name , 'pass'=>bcrypt($request->password), 'mail'=> $this->email ], function($msg){
-//            $msg->to($this->email)->subject('Xác nhận tài khoản');
-//        } );
+        Mail::send('email.active_account', ['name'=>$request->name , 'pass'=> $this->code_active, 'mail'=> $this->email ], function($msg){
+            $msg->to($this->email)->subject('Xác nhận tài khoản');
+        } );
         $user->save();
         return redirect('admin/login')->with('msg', 'Chúng tôi đã gửi đường dẫn kích hoạt vào tài khoản của bạn. Vui lòng vào mail để xác nhận');
+    }
+
+    public function getActive($password){
+        $user = User::where('code_active', $password)->update(['active' => true ]);
+        return redirect('admin/login');
     }
 
     public function getEdit($id)
@@ -153,7 +159,7 @@ class UserController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
 
-            if (Auth::attempt(['email' => $email, 'password' => $password, 'role'=>'admin'])) {
+            if (Auth::attempt(['email' => $email, 'password' => $password, 'role'=>'admin', 'active' => true])) {
                 return redirect()->intended('admin/lesson/list');
             } else {
                 $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);

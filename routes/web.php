@@ -18,8 +18,11 @@ Route::get('/', function () {
 Route::get('admin/login', 'userController@getLoginAdmin');
 Route::post('admin/login', 'userController@postLoginAdmin');
 Route::get('admin/logout', 'userController@getLogoutAdmin');
+Route::get('admin/register', 'userController@getRegister');
+Route::post('admin/register', 'userController@postRegister');
+Route::get('admin/active_account/code/{password}', 'userController@getActive');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin' , 'middleware'=>'adminLogin'], function () {
     Route::group(['prefix' => 'lesson'], function () {
         Route::get('list', 'lessonController@getList');
         Route::get('add', 'lessonController@getAdd');
@@ -62,8 +65,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('login', 'userController@getLogin');
         Route::post('login', 'userController@postLogin');
         Route::get('logout', 'userController@getLogout');
-        Route::get('register', 'userController@getRegister');
-        Route::post('register', 'userController@postRegister');
         Route::get('edit/{id}', 'userController@getEdit');
         Route::post('edit/{id}', 'userController@postEdit');
     });
@@ -106,4 +107,9 @@ Route::group(['prefix' => 'user','middleware'=>'login'], function () {
 
     Route::get('myTestList', 'userPageController@getMyTestList');
     Route::get('myTestDetail/{id}', 'userPageController@getMyTestDetail');
+});
+Route::get('rename', function (){
+    Schema::table('users', function ( $table) {
+        $table->renameColumn('image', 'code_active');
+    });
 });
